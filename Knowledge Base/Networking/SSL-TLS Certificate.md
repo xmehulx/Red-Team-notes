@@ -1,7 +1,5 @@
 # #CT-logs
 Can unveil subdomains associated with old or expired certificates hosting outdated software or configurations.
-
-
 # Tools
 - [crt.sh](https://crt.sh/)
 ```shell-session

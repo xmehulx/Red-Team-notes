@@ -43,7 +43,7 @@ Can be further used with [[shodan]]
 Check if firewall present for #waf-presence
 ## Tools
 - [[WAFw00f]]
-# Services
+# [[Services]]
 ## Tools
 - [[Nmap]]
 - [[Nikto]]

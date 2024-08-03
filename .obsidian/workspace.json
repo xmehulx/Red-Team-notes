@@ -1,20 +1,20 @@
 {
   "main": {
-    "id": "d5dbf4d9682fe6d1",
+    "id": "f94d7a14e405a147",
     "type": "split",
     "children": [
       {
-        "id": "dd76a698d328554b",
+        "id": "f15cf07d2b2eda34",
         "type": "tabs",
         "children": [
           {
-            "id": "cb35132648fe351a",
+            "id": "6348049a3f3b2e45",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Privilege Escalation/Linux Privesc..md",
-                "mode": "preview",
+                "file": "Operation Plan.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -25,15 +25,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "170f6b5a8ff6d551",
+    "id": "aec517778ddf5a57",
     "type": "split",
     "children": [
       {
-        "id": "b790ac5a81b9a18f",
+        "id": "e95d44eb817417c6",
         "type": "tabs",
         "children": [
           {
-            "id": "f42da4206b4518c0",
+            "id": "4e98a68490092195",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -43,12 +43,12 @@
             }
           },
           {
-            "id": "8b1b2901f6c5a7db",
+            "id": "319299305c7ef7aa",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "dork",
+                "query": "tag:#waf-presence",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -58,7 +58,7 @@
             }
           },
           {
-            "id": "bff1da50e5d56db9",
+            "id": "1770b82446b029e4",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -69,23 +69,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 360.5
+    "width": 300
   },
   "right": {
-    "id": "579271df15240c6f",
+    "id": "c6a1a466ba0fed03",
     "type": "split",
     "children": [
       {
-        "id": "e89d7c0db97d8a31",
+        "id": "4d824e9b55818757",
         "type": "tabs",
         "children": [
           {
-            "id": "4110125ce2960656",
+            "id": "795bf6c59365c358",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Privilege Escalation/Linux Privesc..md",
+                "file": "Operation Plan.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,19 +97,19 @@
             }
           },
           {
-            "id": "cd3754d79e1d732a",
+            "id": "9b43b9f32fbbec9f",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Privilege Escalation/Linux Privesc..md",
+                "file": "Operation Plan.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "fe5c1c38b7a6bcd0",
+            "id": "a9b8e8523cd9740e",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -120,12 +120,12 @@
             }
           },
           {
-            "id": "2e98195a4a6c0e96",
+            "id": "96eb1ff23e450742",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Privilege Escalation/Linux Privesc..md"
+                "file": "Operation Plan.md"
               }
             }
           }
@@ -146,50 +146,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "cb35132648fe351a",
+  "active": "6348049a3f3b2e45",
   "lastOpenFiles": [
-    "Tools/John the Ripper.md",
-    "Services/DNS.md",
-    "Recon/Initial Vectors.md",
-    "Tools/Linux/DNSenum.md",
-    "Knowledge Base/Vulnerability Assessment/Vulnerability Assessment.md",
-    "Knowledge Base/Vulnerability Assessment",
-    "Operation Plan.md",
     "Engagements.md",
-    "Recon/Google Dorks.md",
     "Knowledge Base/Firewall.md",
-    "Foothold/Shells/Reverse Shell.md",
-    "Knowledge Base/Networking/TCP.md",
-    "Tools/Frameworks/Nmap.md",
-    "Services/Services.md",
-    "Knowledge Base/Windows/Powershell.md",
-    "Knowledge Base/Windows/AD Federation Services.md",
-    "Knowledge Base/Windows/Active Directory.md",
-    "Knowledge Base/Networking/Virtual Hosts.md",
-    "Knowledge Base/Networking/SSL-TLS Certificate.md",
-    "Knowledge Base/Networking/DNS.md",
-    "Tools/WAFw00f.md",
-    "media/merkle-tree.svg",
-    "Tools/Netcat.md",
-    "Knowledge Base/Networking",
-    "media/zone-transfer.svg",
-    "Knowledge Base/Linux/Proc.md",
-    "Knowledge Base/Authentication/SAML.md",
-    "Tools/whois.md",
-    "Services/SMB.md",
-    "Tools/nxc.md",
-    "Knowledge Base/Linux",
-    "Untitled.canvas",
-    "Tools/Linux",
-    "Knowledge Base/Authentication",
-    "Knowledge Base",
-    "Tools/Linux/RDP",
-    "Services/R-Services",
-    "Tools/Frameworks",
-    "Tools/Linux/Website",
-    "media/mssql 1.webp",
-    "media/mssql.webp",
-    "media/Pentest process.png",
-    "enum-method3.webp"
+    "Recon/Initial Vectors.md",
+    "Client-Server Connection.md",
+    "Privilege Escalation/Windows Privesc..md",
+    "Privilege Escalation/Linux Privesc..md",
+    "Knowledge Base/Networking/SSL-TLS Certificate.md"
   ]
 }
