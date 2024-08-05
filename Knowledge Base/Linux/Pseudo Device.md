@@ -1,0 +1,15 @@
+# #pseudo-networks
+- `/dev/tcp`
+- `/dev/udp`
+# #pseudo-storages
+- `/dev/null`
+- `/dev/zero`
+- `/dev/random`
+- `/dev/urandom`
+# #pseudo-terminals
+- `/dev/tty`
+- `/dev/pts`
+# #pseudo-misc-devices
+- `/dev/full`
+- `/dev/mem`
+- `/dev/kmem`

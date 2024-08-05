@@ -9,3 +9,5 @@ Python:
 ```shell
 $ python3 -c "import pty; pty.spawn('bin/bash')"
 ```
+
+How to tag [[File Transfer#Linux Client#fileless-execution]]
