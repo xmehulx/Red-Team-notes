@@ -11,8 +11,12 @@
             "id": "6348049a3f3b2e45",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Foothold/Shells/Bind Shell.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -44,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "bash /dev/tcp",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Foothold/Shells/Bind Shell.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Foothold/Shells/Bind Shell.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Foothold/Shells/Bind Shell.md"
+              }
             }
           }
         ]
@@ -140,33 +148,33 @@
   },
   "active": "6348049a3f3b2e45",
   "lastOpenFiles": [
-    "File Transfer.md",
     "Foothold/Shells/Reverse Shell.md",
-    "Knowledge Base/Linux/Pseudo Device.md",
+    "Knowledge Base/Windows/Microsoft Defender.md",
     "Foothold/Shells/Bind Shell.md",
-    "Knowledge Base/Windows/Registry.md",
+    "Post Exploitation/Covering Tracks.md",
+    "Post Exploitation/Upgrade Shell.md",
+    "File Transfer.md",
     "Knowledge Base/Cryptography/Asymmetric Algorithms.md",
-    "Knowledge Base/Linux/Untitled",
+    "Knowledge Base/Cryptography/Symmetric Algorithms.md",
     "Run System Commands.md",
+    "Knowledge Base/Linux/Pseudo Device.md",
+    "Knowledge Base/Windows/Registry.md",
+    "Knowledge Base/Linux/Untitled",
     "Tools/Frameworks/Metasploit.md",
     "Engagements.md",
     "Operation Plan.md",
-    "Post Exploitation/Clean Logs.md",
     "Privilege Escalation/Windows Privesc..md",
     "Knowledge Base/Cryptography/Data Encoding.md",
     "Knowledge Base/Cryptography/Digital Signatures.md",
     "Knowledge Base/Cryptography/Key Exchange.md",
     "Knowledge Base/Firewall.md",
     "Knowledge Base/Cryptography/Hashing Functions.md",
-    "Knowledge Base/Cryptography/Symmetric Algorithms.md",
     "Knowledge Base/Cryptography",
     "Untitled.md",
     "Knowledge Base/Windows/Powershell.md",
     "Knowledge Base/Networking/TCP.md",
     "Knowledge Base/Networking/SSL-TLS Certificate.md",
     "Knowledge Base/Networking/DNS.md",
-    "Knowledge Base/Linux/Proc.md",
-    "Knowledge Base/CMS/Joomla.md",
-    "Knowledge Base/Authentication/SAML.md"
+    "Knowledge Base/Linux/Proc.md"
   ]
 }
