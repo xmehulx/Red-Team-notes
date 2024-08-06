@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Foothold/Shells/Bind Shell.md",
+                "file": "Recon/Initial Vectors.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Foothold/Shells/Bind Shell.md",
+                "file": "Recon/Initial Vectors.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Foothold/Shells/Bind Shell.md",
+                "file": "Recon/Initial Vectors.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Foothold/Shells/Bind Shell.md"
+                "file": "Recon/Initial Vectors.md"
               }
             }
           }
@@ -148,16 +148,26 @@
   },
   "active": "6348049a3f3b2e45",
   "lastOpenFiles": [
+    "Recon/Initial Vectors.md",
+    "Recon/Bug Bounty Checklist.md",
+    "Post Exploitation/VM Escape.md",
+    "Services/Services.md",
+    "Knowledge Base/Vulnerability Assessment/Vulnerability Assessment.md",
+    "Services/Kerberos.md",
+    "Knowledge Base/Windows/Powershell.md",
+    "Foothold/Shells/Web Shells.md",
     "Foothold/Shells/Reverse Shell.md",
-    "Knowledge Base/Windows/Microsoft Defender.md",
     "Foothold/Shells/Bind Shell.md",
+    "Knowledge Base/Linux/IPC.md",
+    "Knowledge Base/Linux/Proc.md",
+    "Knowledge Base/Linux/Pseudo Device.md",
+    "Knowledge Base/Windows/Microsoft Defender.md",
     "Post Exploitation/Covering Tracks.md",
     "Post Exploitation/Upgrade Shell.md",
     "File Transfer.md",
     "Knowledge Base/Cryptography/Asymmetric Algorithms.md",
     "Knowledge Base/Cryptography/Symmetric Algorithms.md",
     "Run System Commands.md",
-    "Knowledge Base/Linux/Pseudo Device.md",
     "Knowledge Base/Windows/Registry.md",
     "Knowledge Base/Linux/Untitled",
     "Tools/Frameworks/Metasploit.md",
@@ -165,16 +175,6 @@
     "Operation Plan.md",
     "Privilege Escalation/Windows Privesc..md",
     "Knowledge Base/Cryptography/Data Encoding.md",
-    "Knowledge Base/Cryptography/Digital Signatures.md",
-    "Knowledge Base/Cryptography/Key Exchange.md",
-    "Knowledge Base/Firewall.md",
-    "Knowledge Base/Cryptography/Hashing Functions.md",
-    "Knowledge Base/Cryptography",
-    "Untitled.md",
-    "Knowledge Base/Windows/Powershell.md",
-    "Knowledge Base/Networking/TCP.md",
-    "Knowledge Base/Networking/SSL-TLS Certificate.md",
-    "Knowledge Base/Networking/DNS.md",
-    "Knowledge Base/Linux/Proc.md"
+    "Knowledge Base/Cryptography"
   ]
 }

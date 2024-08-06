@@ -60,3 +60,5 @@ $ dig any inlanefreight.com
 > intext:$company-name inurl:$3rd-party-service
 ```
 
+# BugBounty
+Refer [[Bug Bounty Checklist]]

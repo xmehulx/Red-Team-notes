@@ -6,6 +6,7 @@ If databases are found
 # [[SMB]]
 # [[Services/DNS]]
 # [[SMTP]]
+# [[Kerberos]]
 # [[IMAP-POP3]]
 # [[SNMP]]
 # [[Oracle TNS]]
