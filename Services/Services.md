@@ -16,4 +16,11 @@ If databases are found
 # [[R-Services]]
 # [[RDP]]
 # [[WinRM]]
-# [[HTTP-HTTPS]]
+# [[HTTP-HTTPS]]Use PowerShell when:
+
+
+Possible pathways after:
+
+| [[Upgrade Shell]] |     |
+| ----------------- | --- |
+|                   |     |

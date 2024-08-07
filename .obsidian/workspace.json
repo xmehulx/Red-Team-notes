@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Recon/Initial Vectors.md",
+                "file": "Post Exploitation/Upgrade Shell.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#file-descriptors",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Recon/Initial Vectors.md",
+                "file": "Post Exploitation/Upgrade Shell.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Recon/Initial Vectors.md",
+                "file": "Post Exploitation/Upgrade Shell.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Recon/Initial Vectors.md"
+                "file": "Post Exploitation/Upgrade Shell.md"
               }
             }
           }
@@ -148,33 +148,33 @@
   },
   "active": "6348049a3f3b2e45",
   "lastOpenFiles": [
+    "Knowledge Base/Windows/Shell.md",
+    "Knowledge Base/Linux/Pseudo Device.md",
+    "Knowledge Base/Windows/Active Directory.md",
+    "Knowledge Base/Windows/AD Federation Services.md",
+    "Services/Databases/Oracle RDBMS.md",
+    "Tools/Linux/odat.md",
+    "Post Exploitation/Upgrade Shell.md",
+    "Services/Services.md",
+    "Privilege Escalation/Linux Privesc..md",
+    "Privilege Escalation/Windows Privesc..md",
+    "File Transfer.md",
+    "Tools/Frameworks/Metasploit.md",
     "Recon/Initial Vectors.md",
     "Recon/Bug Bounty Checklist.md",
     "Post Exploitation/VM Escape.md",
-    "Services/Services.md",
     "Knowledge Base/Vulnerability Assessment/Vulnerability Assessment.md",
     "Services/Kerberos.md",
-    "Knowledge Base/Windows/Powershell.md",
     "Foothold/Shells/Web Shells.md",
     "Foothold/Shells/Reverse Shell.md",
     "Foothold/Shells/Bind Shell.md",
     "Knowledge Base/Linux/IPC.md",
     "Knowledge Base/Linux/Proc.md",
-    "Knowledge Base/Linux/Pseudo Device.md",
     "Knowledge Base/Windows/Microsoft Defender.md",
     "Post Exploitation/Covering Tracks.md",
-    "Post Exploitation/Upgrade Shell.md",
-    "File Transfer.md",
     "Knowledge Base/Cryptography/Asymmetric Algorithms.md",
     "Knowledge Base/Cryptography/Symmetric Algorithms.md",
-    "Run System Commands.md",
-    "Knowledge Base/Windows/Registry.md",
     "Knowledge Base/Linux/Untitled",
-    "Tools/Frameworks/Metasploit.md",
-    "Engagements.md",
-    "Operation Plan.md",
-    "Privilege Escalation/Windows Privesc..md",
-    "Knowledge Base/Cryptography/Data Encoding.md",
     "Knowledge Base/Cryptography"
   ]
 }

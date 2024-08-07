@@ -1,7 +1,7 @@
 {
   "collapse-filter": false,
   "search": "",
-  "showTags": false,
+  "showTags": true,
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
@@ -25,7 +25,7 @@
       "query": "path:\"Knowledge Base\"  ",
       "color": {
         "a": 1,
-        "rgb": 16449791
+        "rgb": 1471512
       }
     }
   ],
@@ -39,6 +39,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.44444444444444425,
-  "close": false
+  "scale": 0.19753086419753066,
+  "close": true
 }
