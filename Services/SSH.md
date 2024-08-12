@@ -27,4 +27,4 @@ debug1: Authentications: publickey,password,keyboard-interactive
 use `PreferredAuthentications=<help-above>` 
 # Tools
 - [[SSH-Audit]]
-- [[Metasploit#SSH User Enumeration]]
+- [[Tools/Frameworks/Metasploit#SSH User Enumeration]]
