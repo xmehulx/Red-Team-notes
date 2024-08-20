@@ -2,7 +2,8 @@
 1. **`/etc/crontab`**
 2. **`/etc/cron.d`**
 3. **`/var/spool/cron/crontabs/root`**
-
+# Processes
+Check running processes, could hint at possible VM machine, prompting [[VM Escape]].
 # User Privileges
 1. Sudo
 2. SUID

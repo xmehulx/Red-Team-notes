@@ -1,5 +1,6 @@
-# #aes
-## Windows
+# #block-cipher
+## #aes
+### Windows
 - [Invoke-AESEncryption.ps1](https://www.powershellgallery.com/packages/DRTools/4.0.2.3/Content/Functions%5CInvoke-AESEncryption.ps1)
 ```powershell
 function Invoke-AESEncryption {
@@ -111,3 +112,4 @@ PS > Invoke-AESEncryption -Mode Decrypt -Key "p@ssw0rd" -Text "LtxcRelxrDLrDB9rB
 $ openssl enc -aes256 [-iter 100000] -pbkdf2 -in /etc/passwd -out passwd.enc
 $ openssl enc -d -aes256 -iter 100000 -pbkdf2 -in passwd.enc -out passwd
 ```
+# #stream-cipher

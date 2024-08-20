@@ -1,5 +1,9 @@
+---
+tags:
+  - encoding
+---
 ![[metasploit-framework.png]]
-# #encoding
+# Encoding
 
 # Database
 

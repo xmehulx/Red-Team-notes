@@ -1,0 +1,1 @@
+Useful with [[XSS]] for data exfiltration
