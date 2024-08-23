@@ -5,3 +5,10 @@
 PS > reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
 PS > reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
 ```
+
+# Autorun Processes
+Check registry to find any autorun applications:
+```powershell
+> reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+```
+# Permissions
