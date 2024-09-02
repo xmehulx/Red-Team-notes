@@ -16,8 +16,8 @@ If databases are found
 # [[R-Services]]
 # [[RDP]]
 # [[WinRM]]
-# [[HTTP-HTTPS]]Use PowerShell when:
-
+# [[HTTP-HTTPS]]
+# [[Kubernetes]]
 
 Possible pathways after:
 
