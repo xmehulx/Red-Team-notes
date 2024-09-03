@@ -66,27 +66,7 @@ $ find $(echo $PATH | tr ':' ' ') -type f -exec getcap {} \;
 ```shell-session
 $ find / -path /proc -prune -o -type <f/d> -perm -o+w 2>/dev/null
 ```
-# Hidden Files/Directories
-```shell-session
-$ find / -type <f/d> -name ".*" -ls 2>/dev/null
-```
-# History Files
-```shell-session
-$ find / -type f \( -name *_hist -o -name *_history \) -exec ls -l {} \; 2>/dev/null
-```
-# Temporary Files
-```shell-session
-$ ls -l /tmp /var/tmp /dev/shm
-```
-# Configuration Files
-```shell-session
-$ find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/null
-```
-# SetUID/SetGID
-```shell-session
-$ find / -user root -perm -<4/6>000 -exec ls -ldb {} \; 2>/dev/null
-```
-# System Properties
+# Information Gathering
 ## OS Release
 ```shell-session
 $ cat /etc/os-release
@@ -115,6 +95,31 @@ $ cat `/etc/resolv.conf`                  # Private DNS?
 $ apt list --installed | tr "/" " " | cut -d" " -f1,3 | sed 's/[0-9]://g' | tee -a installed_pkgs.list
 $ sudo -V
 ```
+## Hidden Files/Directories
+```shell-session
+$ find / -type <f/d> -name ".*" -ls 2>/dev/null
+```
+## History Files
+```shell-session
+$ find / -type f \( -name *_hist -o -name *_history \) -exec ls -l {} \; 2>/dev/null
+```
+## Temporary Files
+```shell-session
+$ ls -l /tmp /var/tmp /dev/shm
+```
+## Configuration Files
+```shell-session
+$ find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/null
+```
+## SetUID/SetGID
+```shell-session
+$ find / -user root -perm -<4/6>000 -exec ls -ldb {} \; 2>/dev/null
+```
+# Service-based
+## Logrotate
+## LXD
+## Docker
+## Cron
 
 # Extras
 - All writable files by us
@@ -134,6 +139,7 @@ $ echo "" > "--checkpoint-action=exec=sh root.sh"
 $ echo "" > --checkpoint=1
 ```
 This will replace the wildcard with these files which will act as flags for the `tar` command in the cron job.
+
 # Hardening Services
 Look out for system defenses such as:
 - [Exec Shield](https://en.wikipedia.org/wiki/Exec_Shield)
