@@ -1,7 +1,7 @@
 # Static Libraries
 ## Static Link in Go
 ```shell-session
-$ CGO_ENABLED=0 go build -o chisel ./path_to_chisel
+$ CGO_ENABLED=0 go build -o <script> ./path/to/script
 ```
 ## Static Link in C
 ```shell-session
