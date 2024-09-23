@@ -1,0 +1,1 @@
+Can extract #dpapi master keys

