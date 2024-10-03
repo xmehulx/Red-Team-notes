@@ -11,3 +11,7 @@ $ nxc smb <IP> -u <username> -p <password> --shares
 ```shell-session
 $ nxc smb <IP> -u 'admin' -p '' --shares
 ```
+## Bruteforce RIDs
+```shell-session
+$ crackmapexec smb <IP> -u 'guest' -p '' --rid-brute
+```

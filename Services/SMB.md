@@ -12,6 +12,7 @@ Port: TCP 139, 445
 | `logon script = script.sh`  | What script needs to be executed on the user's login?               |
 | `magic script = script.sh`  | Which script should be executed when the script gets closed?        |
 | `magic output = script.out` | Where the output of the magic script needs to be stored?            |
+- If guest mode allowed, can try to bruteforce RIDs with [[nxc#Bruteforce RIDs|nxc]] or [[CrackMapExec#Bruteforce RIDs|crackmapexec]].
 # Tools
 - [[SMBMap]]
 ```shell-session
