@@ -92,6 +92,8 @@ If not connected to domain, extract #SAM-registry-hive with [[reg.exe]]
 ## Dumping #lsass Process Memory
 ### Using Task Manager (GUI)
 "Create Dump File" of Local Security Authority Process (LSAP) from Task Manager. It gets saved in `C:\Users\<user>\AppData\Local\Temp`. 
+
+`Task Manager` > `"Processes" tab` > `"Local Security Authority" Process` > `Select Create dump file`
 ### Using `rundll32.exe`
 - On CMD:
 ```powershell
