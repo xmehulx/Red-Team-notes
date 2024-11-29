@@ -19,3 +19,16 @@ This grants the caller the right to change the executable file that the system r
 
 # Properties
 ## BINARY_PATH_NAME ( #unquoted-service-path)
+
+# Services
+## #dpapi 
+The Data Protection APIs or [DPAPI](https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-use-data-protection) are used to encrypt and decrypt DPAPI data blobs on a per-user basis for Windows OS features and various third-party applications. Some applications that use DPAPI and for what:
+
+|Applications|Use of DPAPI|
+|---|---|
+|`Internet Explorer`|Password form auto-completion data (username and password for saved sites).|
+|`Google Chrome`|Password form auto-completion data (username and password for saved sites).|
+|`Outlook`|Passwords for email accounts.|
+|`Remote Desktop Connection`|Saved credentials for connections to remote machines.|
+|`Credential Manager`|Saved credentials for accessing shared resources, joining Wireless networks, VPNs and more.|
+The DPAPI masterkey can be used to decrypt the secrets associated with different applications using DPAPI and result in the capturing of credentials for various accounts
