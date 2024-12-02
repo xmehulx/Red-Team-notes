@@ -59,6 +59,16 @@ Generate public-private key and paste the public in server
 ```bash
 echo "ssh-rsa AAAAB...SNIP...M= user@parrot" >> /root/.ssh/authorized_keys
 ```
+
+Or we can find SSH keys:
+- Private Keys
+```shell-session
+$ grep -rnw "PRIVATE KEY" /home/* 2>/dev/null | grep ":1"
+```
+- Public Keys
+```shell-session
+$ grep -rnw "ssh-rsa" /home/* 2>/dev/null | grep ":1"
+```
 # Information Gathering
 ## OS Info
 ```shell-session
@@ -128,12 +138,40 @@ $ find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/n
 ```shell-session
 $ find / -user root -perm -<4/6>000 -exec ls -ldb {} \; 2>/dev/null
 ```
+
+# Credential Hunting
+## SSH Keys
+We can find SSH keys:
+- Private Keys
+```shell-session
+$ grep -rnw "PRIVATE KEY" /home/* 2>/dev/null | grep ":1"
+```
+- Public Keys
+```shell-session
+$ grep -rnw "ssh-rsa" /home/* 2>/dev/null | grep ":1"
+```
+## Browsers
+### Firefox
+`Firefox` stores the credentials encrypted in a hidden folder for the respective user. Often including the associated field names, URLs, and other information. For example, when we store credentials for a web page in the Firefox browser, they are encrypted and stored in `logins.json`
+```shell-session
+$ cat .mozilla/firefox/1bplpd86.default-release/logins.json | jq .
+```
+#### Tools
+- [[Firefox Decrypt]]
+## Memory & Cache
+### Tools
+- [[mimipenguin]]
+- [[LaZagne]]
+```shell-session
+$ sudo python2.7 laZagne.py all
+```
 ## Processes
 Check running processes, could hint at possible VM machine, prompting [[VM Escape]].
 ## Passive Traffic Capture
 If `tcpdump` installed, can try to sniff traffic to get any cleartext data. Can use tools like:
 - [net-creds](https://github.com/DanMcInerney/net-creds)
 - [PCredz](https://github.com/lgandx/PCredz)
+
 # Service-based
 ## Logrotate
 ## LXD

