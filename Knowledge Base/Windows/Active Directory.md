@@ -1,3 +1,7 @@
+---
+tags: []
+---
+# #MicrosoftAD 
 #### AdminSDHolder
 The [AdminSDHolder](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/appendix-c--protected-accounts-and-groups-in-active-directory) object is used to manage ACLs for members of built-in groups in AD marked as privileged.
 

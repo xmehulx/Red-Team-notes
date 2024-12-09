@@ -1,3 +1,4 @@
+Can be used for #PtH 
 ## Extract hash from SAM
 ```shell-session
 $ pypykatz registry --sam sam system
