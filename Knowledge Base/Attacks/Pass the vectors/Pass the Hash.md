@@ -1,8 +1,4 @@
----
-tags:
-  - PtH
-  - PtT
----
+# #PtH 
 Hashes can be obtained in several ways, including:
 - Dumping the local SAM database from a compromised host
 - Extracting hashes from the NTDS database (ntds.dit) on a Domain Controller
