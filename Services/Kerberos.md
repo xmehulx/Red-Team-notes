@@ -2,7 +2,7 @@ Can try `AS-Rep Roasting` attack if any user has `"Do not require Kerberos preau
 
 >**Note:** Modern Windows domains (functional level 2008 and above) use AES encryption by default in normal Kerberos exchanges. If we use a rc4_hmac (NTLM) hash in a Kerberos exchange instead of an aes256_cts_hmac_sha1 (or aes128) key, it may be detected as an "encryption downgrade."
 # Linux
-[[realm]], [[winbind]], [[sssd]], [[klist]], [[kinit]] can be used to check if the linux host is joined to an AD.
+[[realm]], [[winbind]], [[sssd]], [[klist]], [[kinit]] can be used to check if the Linux host is joined to an AD.
 
 - Find keytab files
 ```shell-session
