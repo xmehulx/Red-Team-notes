@@ -1,4 +1,4 @@
-Updated version for crackmapexec
+Updated version for [[crackmapexec]]
 # LDAP
 ``` shell-session
 $ nxc ldap 10.10.11.24 -d ghost.htb -u '' --use-kcache --bloodhound --kdcHost DC01.ghost.htb --dns-server 10.10.11.24 -c All
@@ -11,7 +11,14 @@ $ nxc smb <IP> -u <username> -p <password> --shares
 ```shell-session
 $ nxc smb <IP> -u 'admin' -p '' --shares
 ```
-## Bruteforce RIDs
+
+# Bruteforce
+## SMB
+### Bruteforce RIDs
 ```shell-session
-$ crackmapexec smb <IP> -u 'guest' -p '' --rid-brute
+$ nxc smb <IP> -u 'guest' -p '' --rid-brute
+```
+### Bruteforce Username/Passwords
+```shell-session
+$ nxc smb <IP> -u </path/to/username> -p </path/to/passwords>
 ```

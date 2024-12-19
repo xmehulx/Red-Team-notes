@@ -4,8 +4,6 @@ tags:
   - "#pseudo-networks"
   - self-signed-certificates
 ---
-> **!! NOTE:** User-Agent can be blocked for each tool when accessing remote resource. Refer GTFObins or LOLBAS to find available binaries to transfer data.
-# Servers
 ## Python Server:
 ```shell-session
 $ python3 -m http.server [<PORT>]
