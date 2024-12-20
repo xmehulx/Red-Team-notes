@@ -21,7 +21,7 @@ $ john --wordlist=word.list <mediary_file>
 | `hccap2john`            | Converts WPA/WPA2 handshake captures for John |
 | `office2john`           | Converts MS Office documents for John         |
 | `wpa2john`              | Converts WPA/WPA2 handshakes for John         |
-| `bitlocker2john`        |                                               |
+| `bitlocker2john`        | Converts Bitlocker encrypted drives for John  |
 # Modules
 ## `bitlocker2john`
 ### 1. Get image of the encrypted memory device

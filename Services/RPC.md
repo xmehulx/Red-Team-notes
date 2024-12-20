@@ -1,6 +1,6 @@
 Kind of calling a remote function with some \[optional\] variables as input.
 ```bash
-$ rpcclient -U "" 10.129.14.128
+$ rpcclient -U "" <IP>
 
 Enter WORKGROUP\'s password:
 rpcclient $> 
@@ -18,7 +18,7 @@ rpcclient $>
 | `querygroup <RID>`        | Provides information about a specific group.                       |
 
 ```bash
-for i in $(seq 500 1100);do rpcclient -N -U "" 10.129.14.128 -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo ""; done
+$ for i in $(seq 500 1100);do rpcclient -N -U "" <IP> -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo ""; done
 
         User Name   :   sambauser
         user_rid :      0x1f5
@@ -33,4 +33,4 @@ for i in $(seq 500 1100);do rpcclient -N -U "" 10.129.14.128 -c "queryuser 0x$(p
         group_rid:      0x201
 ```
 
-The same thing can be achieved with [[Impacket#SAMRDump]] 
+The same thing can be achieved with [[Impacket#SAMRDump|Impacket-SAMRDump]].
