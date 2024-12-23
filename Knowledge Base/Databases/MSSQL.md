@@ -29,3 +29,13 @@ To write files using `MSSQL`, we need to enable [Ole Automation Procedures](ht
 
 # Linked Servers
 [linked servers](https://docs.microsoft.com/en-us/sql/relational-databases/linked-servers/create-linked-servers-sql-server-database-engine) are typically configured to enable the database engine to execute a Transact-SQL statement that includes tables in another instance of SQL Server, or another database product such as Oracle.
+
+# Cheatsheet
+```mysql
+> SELECT name FROM sys.databases;
+
+> USE <DATABASE>;
+
+> SELECT name FROM sys.tables; # Query user tables from DB's internal view
+> SELECT table_name FROM information_schema.tables WHERE table_type = 'base table'; # Query tables from information_schema
+```

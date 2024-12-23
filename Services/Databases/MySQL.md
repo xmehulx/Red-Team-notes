@@ -4,16 +4,6 @@ Nmap script: _mysql*_
 ```bash
 cat /etc/mysql/mysql.conf.d/mysqld.cnf | grep -v "#" | sed -r '/^\s*$/d'
 ```
-## Cheatsheet
-
-```mysql
-SHOW databases / tables;
-USE <database>;
-DESCRIBE <table>;
-SELECT * FROM <table> WHERE <column> = "<string>";
-$ mysqldump --host=10.0.0.27 [tablename]
-select version();
-```
 ### Dangerous Settings
 
 | **Settings**       | **Description**                                                                                                                                                                                                                                                           |

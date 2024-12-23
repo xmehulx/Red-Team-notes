@@ -4,7 +4,7 @@ $ samrdump.py 10.129.14.128
 ```
 # MSSQLclient
 ```shell-session
-$ mssqlclient.py [-db volume] <DOMAIN>/<USERNAME>:<PASSWORD>@<IP>
+$ mssqlclient.py [-db volume] <DOMAIN>/<USERNAME>[:<PASSWORD>]@<IP>
 ```
 # WMIexec
 ```shell-session

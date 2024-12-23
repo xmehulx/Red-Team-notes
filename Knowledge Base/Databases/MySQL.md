@@ -11,3 +11,13 @@ A global system variable `secure_file_priv` may be set as follows:
 - Empty: the variable has no effect, which is not a secure setting.
 - Directory Name: the server limits import and export operations to work only with files in that directory. The directory must exist; the server does not create it.
 - `NULL`: the server disables import and export operations.
+## Cheatsheet
+
+```mysql
+SHOW databases / tables;
+USE <database>;
+DESCRIBE <table>;
+SELECT * FROM <table> WHERE <column> = "<string>";
+$ mysqldump --host=10.0.0.27 [tablename]
+select version();
+```

