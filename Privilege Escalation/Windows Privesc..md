@@ -110,14 +110,24 @@ If not connected to domain, extract #SAM-registry-hive with [[reg.exe]]
 >Note: Need CMD with admin privilege.
 ![[reg.exe#Save registry]]
 
-## Dumping LSA Secrets/SAM Remotely  ![[CrackMapExec#Dump LSA/SAM Remotely]] 
+## Dumping LSA Secrets/SAM Remotely  ![[CrackMapExec#Dump LSA/SAM Remotely]]
+### Tools
+- [[pypykatz]] to extract hashes from SAM/SYSTEM
+
 # Enumeration
-## Find Keywords
-```cmd-session
-C:\> findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml *.git *.ps1 *.yml
+## Find String within Files
+```powershell
+> findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml *.git *.ps1 *.yml
+> findstr /s /i cred n:\*.*
+PS > Get-ChildItem -Recurse -Path N:\ | Select-String "cred" -List
+```
+## Find Specific Filenames
+```powershell
+> dir n:\*cred* /s /b
+PS > Get-ChildItem -Recurse -Path N:\ -Include *cred* -File
 ```
 ## Tools
 - [[LaZagne]]
 ```cmd-session
-> start lazagne.exe all
+> lazagne.exe all
 ```

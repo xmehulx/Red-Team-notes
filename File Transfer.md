@@ -62,12 +62,13 @@ Refer #self-signed-certificates
 $ openssl s_server -quiet -accept 80 -cert certificate.pem -key key.pem < <file>
 ```
 # Windows Client
-## Net
+## [[net use]]
 - SMB
 ```powershell
 > net use n: \\IP\shareName /user:test password
 > copy n:\nc.exe
 ```
+## [[New-PSDrive]]
 Map remote SMB server to system.
 ```Powershell
 $Username = "Username" 

@@ -8,7 +8,14 @@
 | `anon_root=/home/username/ftp` | Directory for anonymous.                                                           |
 | `write_enable=YES`             | Allow the usage of FTP commands: STOR, DELE, RNFR, RNTO, MKD, RMD, APPE, and SITE? |
 
-
 ```shell-session
 $ wget -m --no-passive ftp://anonymous:anonymous@10.129.14.136
 ```
+
+# FTP Bounce Attack
+Use Nmap's `-b` flag to use FTP servers to deliver outbound traffic to another device on the network.
+```shell-session
+$ nmap -Pn -v -n -p80 -b anonymous:<PASSWORD>@<INTERMEDIATE-IP> <TARGET-IP>
+```
+## Tools
+- [[Medusa]]![[Medusa#Bruteforce FTP]]

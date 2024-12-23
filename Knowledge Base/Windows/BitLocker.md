@@ -1,0 +1,3 @@
+[BitLocker](https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-device-encryption-overview-windows-10) is an encryption program for entire partitions and external drives which uses `AES` encryption with 128-bit or 256-bit length. If the password/PIN is forgotten, the recovery key can be used to decrypt the partition or drive. The recovery key is a 48-digit string of numbers generated during BitLocker setup that also can be brute-forced.
+
+We can identify if a `.vhd` file is BitLocker encrypted or not by looking for `-FVE-FS-<#>` (Full Volume Encryption File System) in its text where the number `<#>` denotes the version.

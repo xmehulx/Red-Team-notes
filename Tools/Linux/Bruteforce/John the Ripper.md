@@ -25,6 +25,7 @@ $ john --wordlist=word.list <mediary_file>
 # Modules
 ## `bitlocker2john`
 ### 1. Get image of the encrypted memory device
+If you already have the encrypted `.vhd`, skip to step 2.
 ```shell-session
 $ sudo dd if=/dev/disk2 of=/path/to/imageEncrypted conv=noerror,sync
 ```
@@ -35,4 +36,14 @@ $ john --format=bitlocker-opencl --wordlist=wordlist <HASH-1>
 ```
 >It gives 4 different hashes, the first one being the Bitlocker password,
 
+If the device was encrypted using the User Password authentication method, bitlocker2john prints those 2 hashes:
+
+- $bitlocker\$0\$… : it starts the User Password fast attack mode (see [User Password Section](https://openwall.info/wiki/john/OpenCL-BitLocker#User-Password-authentication-method "john:OpenCL-BitLocker ↵"))    
+- $bitlocker\$1\$… : it starts the User Password attack mode with MAC verification (slower execution, no false positives)    
+In any case, `bitlocker2john` prints 2 extra hashes:
+- $bitlocker\$2\$… : it starts the Recovery Password fast attack mode (see [Recovery Password Section](https://openwall.info/wiki/john/OpenCL-BitLocker#Recovery-Password-authentication-method "john:OpenCL-BitLocker ↵"))
+- $bitlocker\$3\$… : it starts the Recovery Password attack mode with MAC verification (slower execution, no false positives)
+
 [[Hashcat#Bitlocker Cracking|Hashcat]] can also be used for this.
+
+>Post cracking, mount the drive in Windows (requires administrator privileges) or Linux.

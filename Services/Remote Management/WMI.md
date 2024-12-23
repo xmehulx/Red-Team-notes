@@ -4,4 +4,4 @@ Windows Management Instrumentation allows read and write access to almost all se
 
 # Tools
 - [[WMIC]]
-- [[Impacket#WMIexec]]
+- [[WMIExec]]

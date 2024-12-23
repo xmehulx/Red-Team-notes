@@ -5,6 +5,10 @@ $ rpcclient -U "" <IP>
 Enter WORKGROUP\'s password:
 rpcclient $> 
 ```
+# Useful Flags
+- `-U'%'`: Authenticate with Null Session
+
+# Useful commands
 
 | **Query**                 | **Description**                                                    |
 | ------------------------- | ------------------------------------------------------------------ |
@@ -33,4 +37,4 @@ $ for i in $(seq 500 1100);do rpcclient -N -U "" <IP> -c "queryuser 0x$(printf '
         group_rid:      0x201
 ```
 
-The same thing can be achieved with [[Impacket#SAMRDump|Impacket-SAMRDump]].
+The same thing can be achieved with [[SAMRDump|Impacket-SAMRDump]].

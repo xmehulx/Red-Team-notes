@@ -18,7 +18,7 @@ Refer [[HTTP-HTTPS]]
 ### Subdomain enumeration
 - Wordlist
 	#web-fuzzers 
-	[[Services/DNS#Subdomain Bruteforcing]]
+	[[Services/Networking & Infrastructure/DNS#Subdomain Bruteforcing]]
 - Tools
 	[[DNSenum]]
 	[[amass]]
@@ -48,7 +48,7 @@ Check if firewall present for #waf-presence
 - [[Nmap]]
 - [[Nikto]]
 
-### [[Services/DNS]] Records
+### [[Services/Networking & Infrastructure/DNS]] Records
 
 ```bash
 $ dig any inlanefreight.com

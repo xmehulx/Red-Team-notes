@@ -1,4 +1,10 @@
-[[MongoDB]], [[Services/Databases/MySQL]], [[Elastic DB]]
+# [[MongoDB]]
+# [[Services/Databases/MySQL]]
+# [[Elastic DB]]
+# [[Services/Databases/MSSQL]]
+# [[PostgreSQL]]
+# [[Oracle RDBMS]]
+# [[Oracle TNS]]
 
 | Potential               | Data             | in                | DBs        |
 | ----------------------- | ---------------- | ----------------- | ---------- |

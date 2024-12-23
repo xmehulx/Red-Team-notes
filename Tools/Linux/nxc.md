@@ -7,6 +7,9 @@ $ nxc ldap 10.10.11.24 -d ghost.htb -u '' --use-kcache --bloodhound --kdcHost DC
 ```shell-session
 $ nxc smb <IP> -u <username> -p <password> --shares
 ```
+## Useful Flags
+- `--continue-on-success`: To keep on bruteforcing after a successful login.
+- `--local-auth`: If the target is a non-domain joined system.
 ## List Shares Anonymously
 ```shell-session
 $ nxc smb <IP> -u 'admin' -p '' --shares

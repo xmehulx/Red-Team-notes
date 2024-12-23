@@ -2,8 +2,9 @@
 tags:
   - basic-http-auth
 ---
-# 
-
+# Important Flags
+- `-u`: Try all users for 1 password first
+- `-f`: Stop after first success
 # Bruteforcing Protocols
 ## HTTP
 ### Basic HTTP Authentication
