@@ -3,5 +3,5 @@
 2. [[wfuzz]]
 3. [[Medusa]]
 4. [[patator]]
-5. [[hydra]]
+5. [[Hydra]]
 6. [[Hashcat]]

@@ -26,6 +26,6 @@ Has authentication and encryption (uses [[PSK]])
 | `rwcommunity6 <community string> <IPv6 address>` | Same access as with `rwcommunity` with the difference of using IPv6.                  |
 
 ### Tools 
-1. [[snmpwalk]]: query the OIDs with their information.
+1. [[SNMPwalk]]: query the OIDs with their information.
 2. [[onesixtyone]]: brute-force the names of the community strings.
 3. [[braa]]: brute-force individual OIDs and enumerate their information.
