@@ -1,6 +1,36 @@
-Port: 110/143 or 993/995 (+TLS)
+Port: 
+	110 (POP3 unencrypted)
+	143 (IMAP4 unencrypted)
+	993 (POP3 encrypted)
+	995 (IMAP4 encrypted +TLS)
 > - Unencrypted by default.
 > - Check if [[SNMP]] present. They might be managing something.
+
+Nowadays, most organizations use 3rd-party cloud services.
+```TXT
+hackthebox.eu mail is handled by 1 aspmx.l.google.com.
+microsoft.com mail is handled by 10 microsoft-com.mail.protection.outlook.com.
+plaintext.do.           7076    IN      MX      50 mx3.zoho.com.
+inlanefreight.com.      300     IN      MX      10 mail1.inlanefreight.com.
+```
+# POP3
+>Servers **usually** deletes email after getting downloaded on a client, but can be configured to not do so.
+
+# Misconfiguration
+We can use the `POP3` protocol to enumerate users depending on the service implementation.
+## `User`
+To check if a user exists or not.
+```shell-session
+$ telnet 10.10.110.20 110
+
++OK POP3 Server ready
+
+USER julio
+-ERR
+
+USER john
++OK
+```
 ## Dangerous Setting
 |**Setting**|**Description**|
 |---|---|
@@ -19,7 +49,8 @@ Unencrypted
 openssl s_client -connect 10.129.14.128:[pop3s/imaps]
 ```
 
-## Navigation
+# Navigation
+## IMAPS
 ```IMAP
 <seq> LOGIN <USER> <PASS>
 <seq> LIST "" *
@@ -28,6 +59,23 @@ openssl s_client -connect 10.129.14.128:[pop3s/imaps]
 <seq> fetch <#>:<#> (BODY[HEADER]) 
 <seq> fetch <#> (BODY[n])
 ```
-
+## POP3
+```POP3
+USER <username>
+PASS <password>
+STAT
+LIST
+RETR <#>
+QUIT
+```
 ## Tools
+- [[Dig]]
+```shell-session
+$ dig mx inlanefreight.com | grep "MX" | grep -v ";"
+```
+- [[Host]]
+```shell-session
+$ host -t MX hackthebox.eu
+$ host -t A mail1.inlanefreight.htb.
+```
 - [[Evolution]]

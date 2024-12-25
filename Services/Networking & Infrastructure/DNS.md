@@ -37,6 +37,14 @@ mail1.inlanefreight.htb. 604800 IN      A       10.129.18.201
 app.inlanefreight.htb.  604800  IN      A       10.129.18.15
 ```
 ## Domain Takeover
+A DNS's canonical name (`CNAME`) record is used to map different domains to a parent domain. Many organizations use third-party services like AWS, GitHub, Akamai, Fastly, and other CDNs to host their content. In this case, they usually create a subdomain and make it point to those services. For example,
+
+```TXT
+sub.target.com.   60   IN   CNAME   anotherdomain.com
+```
+
+The domain name `sub.target.com` uses a CNAME record to another domain (i.e., `anotherdomain.com`). If `anotherdomain.com` expires and we register it for ourselves, we would have complete control over `sub.target.com` since the `target.com`'s DNS server has the above `CNAME` record.
+
 After finding subdomains, using `nslookup` or `host`, we can enumerate the `CNAME` records for them.
 ```shell-session
 $ host support.inlanefreight.com

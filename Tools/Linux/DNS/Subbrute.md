@@ -3,3 +3,5 @@
 $ echo "ns1.inlanefreight.com" > ./resolvers.txt
 $ ./subbrute inlanefreight.com -s ./names.txt -r ./resolvers.txt
 ```
+>Modify /etc/hosts with `<IP> inlanefreight.com` and put only `inlanefreight.com` in resolvers.txt
+
