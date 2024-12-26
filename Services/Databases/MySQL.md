@@ -29,5 +29,5 @@ If [User Defined Functions](https://dotnettutorials.net/lesson/user-defined-func
 > select LOAD_FILE("/etc/passwd");
 ```
 # Tools
-- [[MySQL - tool]]
+- [[Tools/Linux/Database/MySQL]]
 - [[dbeaver]]
