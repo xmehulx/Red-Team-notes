@@ -3,10 +3,10 @@
 ```shell-session
 $ smbclient -U <user> \\\\<IP>\\<share>
 ```
-## Read Share Anonymously
+## Read Shares Anonymously
 ```shell-session
 $ smbclient -N -L //<IP>/<READABLE-SHARE>
-$ smbclient //<IP>/<share> -U 'abc'
+$ smbclient //<IP>/<share> -U ''
 ```
 ## Using Kerberos Ticket
 If ccache is present and loaded, we can read shares using this ticket.

