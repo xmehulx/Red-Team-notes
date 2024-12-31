@@ -25,4 +25,4 @@ Components:
 |Supermicro IPMI|ADMIN|ADMIN|
 
 ## Attacks
-Exploit [flaw](http://fish2.com/ipmi/remote-pw-cracking.html) in the RAKP protocol in IPMI 2.0 to grab client's password hash during authentication with [[Tools/Linux/Frameworks/Metasploit#IPMI Hash Dump|Metasploit]]. Use with [[Hashcat#IPMI2 RAKP HMAC-SHA1|Hashcat]].
+Exploit [flaw](http://fish2.com/ipmi/remote-pw-cracking.html) in the RAKP protocol in IPMI 2.0 to grab client's password hash during authentication with [[MSFConsole#IPMI Hash Dump|Metasploit - IPMI Module]]. Use with [[Hashcat#IPMI2 RAKP HMAC-SHA1|Hashcat]].

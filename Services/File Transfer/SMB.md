@@ -39,7 +39,7 @@ domain=.
 - [[SMBExec|Impacket-SMBExec]]
 - [[atexac|Impacket-atexac]]
 - [[CrackMapExec#SMBExec|CME-SMBExec]]
-- [[Tools/Linux/Frameworks/Metasploit|Metasploit]]
+- [[MSFConsole|Metasploit]]
 ## Tools
 - [[SMBMap]]
 ```shell-session
