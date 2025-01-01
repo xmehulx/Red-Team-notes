@@ -8,12 +8,15 @@ The `-L` flag tells the SSH client to request the SSH server to forward all th
 $ ssh -L <INTERNAL-PORT>:localhost:<REMOTE-SYSTEM-PORT> <USER>@<IP>
 $ ssh -L 1234:localhost:3306 -L 8080:localhost:80 ubuntu@10.129.202.64
 ```
+With this we can, for example, scan internal ports which would have been otherwise inaccessible from our base system:
+```shell-session
+$ nmap -sCV -p <INTERNAL-PORT> localhost
+```
 ## Dynamic Port Forwarding
 If the remote system has additional NICs and connected to other networks, we can't perform scans directly as our system does not know that network path. We can start a #SOCKS listener on our local host and then configure SSH to forward that traffic via SSH to the network (for e.g. 172.16.5.0/23) after connecting to the target host
 1. Enable SOCKS listener in `/etc/proxychains.conf`:
 ```shell-session
-$ tail -2 /etc/proxychains.conf
-# defaults set to "tor"
+$ tail -1 /etc/proxychains.conf
 socks4 	127.0.0.1 <LOCAL-PORT>
 ```
 2. Forward all data from the `LOCAL-PORT` via SSH client to remote system:
