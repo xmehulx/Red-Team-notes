@@ -262,7 +262,7 @@ $ cat <&3
 ```shell-session
 $ scp <user>@<IP>:/file/to/download /path/to/save
 ```
-# Chisel
+# [[Chisel]]
 Server (Linux):
 ```shell-session
 $ chisel server [--reverse] [--socks5] -p 8001
