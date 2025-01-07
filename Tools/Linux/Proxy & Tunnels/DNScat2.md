@@ -1,6 +1,7 @@
 ---
 tags:
   - firewall-evasion
+  - dns
 ---
 [Dnscat2](https://github.com/iagox86/dnscat2) is a tunneling tool that uses DNS protocol to send data between two hosts. It uses an encrypted `Command-&-Control` (`C&C` or `C2`) channel and sends data inside TXT records within the DNS protocol.
 

@@ -69,7 +69,7 @@ $ openssl s_server -quiet -accept 80 -cert certificate.pem -key key.pem < <file>
 > copy n:\nc.exe
 ```
 ## [[New-PSDrive]]
-Map remote SMB server to system.
+Map remote share to system.
 ```Powershell
 $Username = "Username" 
 $Password = "Password" 
