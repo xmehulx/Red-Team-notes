@@ -107,6 +107,7 @@ meterpreter > run autoroute -s 172.16.5.0/23
 ```shell-session
 $ proxychains nmap 172.16.5.19 -p3389 -sT -v -Pn
 ```
+>Try using with **sudo** if doesn't relay
 ### 3. Using `portfwd`
 ```shell-session
 meterpreter > portfwd add -l <PORT> -p 3389 -r 172.16.5.19
