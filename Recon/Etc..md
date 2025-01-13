@@ -7,3 +7,6 @@ After Foothold, we can use below keywords to search for open creds on system:
 | Users         | Passkeys     | Passphrases |
 | configuration | dbcredential | dbpassword  |
 | pwd           | Login        | Credentials |
+# Wordlists
+## [SecLists](https://github.com/danielmiessler/SecLists)
+## [Insidetrust](https://github.com/insidetrust/statistically-likely-usernames)

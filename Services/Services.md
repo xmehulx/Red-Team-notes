@@ -1,3 +1,4 @@
+
 ## [[Databases]]
 If databases are found
 # File Sharing
@@ -19,6 +20,8 @@ If databases are found
 ## [[RPC]]
 # Networking & Infrastructure
 ## [[Services/Networking & Infrastructure/DNS|DNS]]
+## [[LLMNR]]
+## [[NBT-NS]]
 ## [[SNMP]]
 # Directory & Identity Services
 ## [[LDAP]]
@@ -28,6 +31,10 @@ If databases are found
 ## [[Kubernetes]]
 # [[R-Services]]
 Possible pathways after:
+
+# Tools
+- [[Nmap]]
+- [[Nikto]]
 
 | [[Upgrade Shell]] |     |
 | ----------------- | --- |

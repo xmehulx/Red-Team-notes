@@ -8,7 +8,7 @@
 - [[#Single Domain]]
 - [[#Information Gathering]]
 - [[#Configuration Management]]
-- [[#Secure Transmission]]]
+- [[#Secure Transmission]]
 - [[#Authentication]]
 - [[#Session Management]]
 - [[#Authorization]]

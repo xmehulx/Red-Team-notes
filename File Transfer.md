@@ -62,7 +62,7 @@ Refer #self-signed-certificates
 $ openssl s_server -quiet -accept 80 -cert certificate.pem -key key.pem < <file>
 ```
 # Windows Client
-## [[net use]]
+## [[Net]]
 - SMB
 ```powershell
 > net use n: \\IP\shareName /user:test password

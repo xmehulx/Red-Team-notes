@@ -16,7 +16,7 @@ Port: TCP 139(with NetBIOS), 445 (on TCP/IP)
 
 # Windows
 ## Commands
-- [[net use]] (CMD)
+- [[Net]] (CMD)
 ```cmd-session
 > net use n: \\<IP>\<share> [/user:plaintext Password123]
 The command completed successfully.

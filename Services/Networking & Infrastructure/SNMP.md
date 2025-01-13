@@ -2,11 +2,8 @@
 **Config file**: `/etc/snmp/snmpd.conf`
 ### MIB
 Management Information Base do not contain data, but they explain where to find which information and what it looks like, which returns values for the specific OID, or which data type is used. MIB files are written in the `Abstract Syntax Notation One` (`ASN.1`) based ASCII text format.
-
-
 ## SNMPv1
 No authentication, no encryption
-
 ## SNMPv2
 Uses [[#Community Strings]]. But this is transmitted only in plain-text, so no in-built security.
 ### Community Strings
