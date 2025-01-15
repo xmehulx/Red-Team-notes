@@ -10,4 +10,5 @@ $ enum4linux-ng 172.16.5.5 -oA ilfreight
 ```
 ## Useful Flags
 - `-P`: Extract Password policy
+- `-U`: Extract list of users
 - `-oA`: Save output in all JSON and YAML format

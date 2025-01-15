@@ -1,0 +1,1 @@
+[Get-MpComputerStatus](https://docs.microsoft.com/en-us/powershell/module/defender/get-mpcomputerstatus?view=win10-ps) is used to get the current Microsoft Defender status. We can look for `RealTimeProtectionEnabled` parameter which will reveal whether Defender is enabled on the system or not.
