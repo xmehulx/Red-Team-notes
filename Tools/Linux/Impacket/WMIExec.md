@@ -2,6 +2,12 @@
 tags:
   - PtT
 ---
+Generates:
+	[4688: A new process has been created](https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4688)
+
+WMIexec utilizes a semi-interactive shell where commands are executed through [Windows Management Instrumentation](https://docs.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page). It does not drop any files or executables on the target host and generates fewer logs than other modules.
+>Can still be detected by modern AV and EDR systems
+# Example Usage
 ```shell-session
 $ wmiexec.py Cry0l1t3:'P455w0rD!'@10.129.201.248 "hostname"
 

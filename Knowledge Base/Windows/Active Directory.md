@@ -33,3 +33,5 @@ The default password policy when a new domain is created is as follows, and ther
 |Account lockout duration|Not set|
 |Account lockout threshold|0|
 |Reset account lockout counter after|Not set|
+# ActiveDirectory PS Module
+[ActiveDirectory PowerShell module](https://docs.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2022-ps) is a group of PowerShell cmdlets for administering an Active Directory environment from the command line. It consists of 147 different cmdlets (as of now)
