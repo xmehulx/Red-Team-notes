@@ -1,4 +1,3 @@
-
 > Red team can be allowed to move laterally after a certain period of no progress.
 
 [[ROE]]

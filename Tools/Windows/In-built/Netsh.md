@@ -11,3 +11,8 @@ If the initial compromised host is a Windows system connected to deeper networks
 > netsh.exe interface portproxy show v4tov4
 ```
 Now we can simply `xfreerdp` into remoter Windows server through `10.129.15.150:8080`
+
+# Firewall Checks
+```powershell
+PS > netsh advfirewall show allprofiles
+```

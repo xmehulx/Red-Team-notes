@@ -24,7 +24,7 @@ If databases are found
 ## [[NBT-NS]]
 ## [[SNMP]]
 # Directory & Identity Services
-## [[LDAP]]
+## [[Services/Directory & Identity Services/LDAP]]
 ## [[Kerberos]]
 # Web Application
 ## [[HTTP-HTTPS]]

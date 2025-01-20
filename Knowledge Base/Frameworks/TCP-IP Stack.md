@@ -35,4 +35,5 @@ Provides services for applications and end-users.
 ## #ascii 
 ## #dns
 ## #rdp 
+## #kerberos
 ...
