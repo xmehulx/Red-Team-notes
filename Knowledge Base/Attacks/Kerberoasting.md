@@ -3,7 +3,7 @@ tags:
   - MicrosoftAD
   - kerberos
 ---
-Kerberoasting is a lateral movement/privilege escalation technique in AD environments, targetting [Service Principal Names (SPN)](https://docs.microsoft.com/en-us/windows/win32/ad/service-principal-names) accounts. SPNs are unique identifiers that Kerberos uses to map a service instance to a service account in whose context the service is running. Any domain user can request a Kerberos ticket for any service account in the same domain, and also across forest trusts (if authentication is permitted across the trust boundary).
+#kerberoasting is a lateral movement/privilege escalation technique in AD environments, targetting [Service Principal Names (SPN)](https://docs.microsoft.com/en-us/windows/win32/ad/service-principal-names) accounts. SPNs are unique identifiers that Kerberos uses to map a service instance to a service account in whose context the service is running. Any domain user can request a Kerberos ticket for any service account in the same domain, and also across forest trusts (if authentication is permitted across the trust boundary).
 
 # Requirements
 1. An account's cleartext password/NTLM hash
