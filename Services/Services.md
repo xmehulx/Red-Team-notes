@@ -2,33 +2,33 @@
 ## [[Databases]]
 If databases are found
 # File Sharing
-## [[FTP]]
-## [[NFS]]
+## - [[FTP]]
+## - [[NFS]]
 
-## [[SMB]]
-## [[NFS]]
-## [[Rsync]]
+## - [[SMB]]
+## - [[NFS]]
+## - [[Rsync]]
 # Email
-## [[SMTP]]
-## [[IMAP-POP3]]
+## - [[SMTP]]
+## - [[IMAP-POP3]]
 # Remote Connection
-## [[WinRM]]
-## [[SSH]]
-## [[RDP]]
-## [[IPMI]]
-## [[WMI]]
-## [[RPC]]
+## - [[WinRM]]
+## - [[SSH]]
+## - [[RDP]]
+## - [[IPMI]]
+## - [[WMI]]
+## - [[RPC]]
 # Networking & Infrastructure
-## [[Services/Networking & Infrastructure/DNS|DNS]]
-## [[LLMNR]]
-## [[NBT-NS]]
-## [[SNMP]]
+## - [[Services/Networking & Infrastructure/DNS|DNS]]
+## - [[LLMNR]]
+## - [[NBT-NS]]
+## - [[SNMP]]
 # Directory & Identity Services
-## [[Services/Directory & Identity Services/LDAP]]
-## [[Kerberos]]
+## - [[Services/Directory & Identity Services/LDAP|LDAP]]
+## - [[Services/Directory & Identity Services/Kerberos|Kerberos]]
 # Web Application
-## [[HTTP-HTTPS]]
-## [[Kubernetes]]
+## - [[HTTP-HTTPS]]
+## - [[Kubernetes]]
 # [[R-Services]]
 Possible pathways after:
 
