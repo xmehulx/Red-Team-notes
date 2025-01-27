@@ -37,3 +37,38 @@ All executed commands are logged in `Applications and Services Logs` > `Microsof
 # [[WMIC]]
 # [[Net]]
 # [[Dsquery]]
+# ACL Enumeration
+[[PowerView#ACL Enumeration|> Using PowerView]]
+## 1. [[Get-ADUser]]
+Create a list of Domain users
+```powershell
+PS > Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName > ad_users.txt
+```
+## 2. [[Get-ACL]]
+Loop each user to get ACL information for each domain. `Access property` will give us information about access rights and finally we set the `IdentityReference` property to the user we are in control of (or looking to see what rights they have), in this case, `wley`.
+```powershell
+PS > foreach($line in [System.IO.File]::ReadLines("C:\Users\htb-student\Desktop\ad_users.txt")) {get-acl  "AD:\$(Get-ADUser $line)" | Select-Object Path -ExpandProperty Access | Where-Object {$_.IdentityReference -match 'INLANEFREIGHT\\wley'}}
+
+Path                  : Microsoft.ActiveDirectory.Management.dll\ActiveDirectory:://RootDSE/CN=Dana 
+                        Amundsen,OU=DevOps,OU=IT,OU=HQ-NYC,OU=Employees,OU=Corp,DC=INLANEFREIGHT,DC=LOCAL
+ActiveDirectoryRights : ExtendedRight
+InheritanceType       : All
+ObjectType            : 00299570-246d-11d0-a768-00aa006e0529
+InheritedObjectType   : 00000000-0000-0000-0000-000000000000
+ObjectFlags           : ObjectAceTypePresent
+AccessControlType     : Allow
+IdentityReference     : INLANEFREIGHT\wley
+IsInherited           : False
+InheritanceFlags      : ContainerInherit
+PropagationFlags      : None
+```
+- Lookup the `ObjectAceType` online or reverse-search using PS
+```powershell
+PS > $guid= "00299570-246d-11d0-a768-00aa006e0529"
+PS > Get-ADObject -SearchBase "CN=Extended-Rights,$((Get-ADRootDSE).ConfigurationNamingContext)" -Filter {ObjectClass -like 'ControlAccessRight'} -Properties * | Select Name,DisplayName,DistinguishedName,rightsGuid| ?{$_.rightsGuid -eq $guid} | fl
+
+Name              : User-Force-Change-Password
+DisplayName       : Reset Password
+DistinguishedName : CN=User-Force-Change-Password,CN=Extended-Rights,CN=Configuration,DC=INLANEFREIGHT,DC=LOCAL
+rightsGuid        : 00299570-246d-11d0-a768-00aa006e0529
+```

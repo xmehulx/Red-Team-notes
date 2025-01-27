@@ -4,6 +4,18 @@ PowerShell [Constrained Language Mode](https://devblogs.microsoft.com/powershel
 PS > $ExecutionContext.SessionState.LanguageMode
 ConstrainedLanguage
 ```
+# [Credential Support](https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/add-credentials-to-powershell-functions?view=powershell-7.4)
+## Interactive Credential
+```powershell
+$Cred = Get-Credential 
+$Cred = Get-Credential -Credential <DOMAIN\USER> 
+$Cred = Get-Credential -UserName <DOMAIN\USER> -Message 'Enter Password'
+```
+## Static Credential
+```powershell
+$password = ConvertTo-SecureString "<PASS>" -AsPlainText -Force
+$Cred = New-Object System.Management.Automation.PSCredential ("<USER>", $password)
+```
 # Logs
 With [Script Block Logging](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging_windows?view=powershell-7.2) enabled, whatever we type into the terminal gets sent to this log. The logs can be seen in the [[Event Viewer]],
 1. All executed commands are logged in `Applications and Services Logs` > `Microsoft` > `Windows` > `PowerShell` > `Operational`. 

@@ -1,0 +1,1 @@
+[Get-ADUser](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-aduser?view=windowsserver2025-ps) gets one or more Active Directory users.

