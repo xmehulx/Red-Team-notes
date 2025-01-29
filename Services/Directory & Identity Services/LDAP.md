@@ -1,4 +1,8 @@
-Port: 389, 636(+TLS) OR 3268, 3269(+TLS) (Global Catalog)
+Port:
+	389
+	636 (+TLS)
+	3268 (Global Catalog)
+	3269 (Global Catalog +TLS)
 
 # Tools
 - [[LDAPsearch]]
