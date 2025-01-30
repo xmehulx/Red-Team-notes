@@ -47,3 +47,5 @@ ActiveDirectoryRights : ExtendedRight
 SecurityIdentifier    : S-1-5-21-3842939050-3880317879-2865463114-1164
 ObjectAceType         : DS-Replication-Get-Changes-All
 ```
+## 3. Extract NTLM Hashes and [[Services/Directory & Identity Services/Kerberos|Kerberos]] Keys
+We can use [[SecretsDump]] for this
