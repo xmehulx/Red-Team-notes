@@ -18,4 +18,4 @@ If the system is not connected to a domain, we can extract these offline to crac
 |`hklm\security`|Contains cached credentials for domain accounts. We may benefit from having this on a domain-joined Windows target.|
 
 # #syskey
-System key utility (Syskey) protects the SAM database. But if
+System key utility (Syskey) protects the SAM database. But if the [reversible encryption](https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/store-passwords-using-reversible-encryption) is enabled, the passwords are stored using RC4 encryption with the key needed to decrypt them being stored in the registry (the [Syskey](https://docs.microsoft.com/en-us/windows-server/security/kerberos/system-key-utility-technical-overview)) and can be extracted by a Domain Admin or equivalent.

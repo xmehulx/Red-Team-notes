@@ -1,3 +1,9 @@
+---
+tags:
+  - windows
+  - reversible-encryption
+  - powershell
+---
 # Example Usage
 ## Discover Modules
 ```powershell
@@ -17,6 +23,10 @@ PS > Get-ADDomain
 We want to filter for AD accounts with the `ServicePrincipalName` property populated as they may be susceptible to a Kerberoasting attack.
 ```powershell
 PS > Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName
+```
+- Check for accounts with reversible encryption enabled:
+```powershell
+PS > Get-ADUser -Filter 'userAccountControl -band 128' -Properties userAccountControl
 ```
 ## [Get-ADTrust](https://docs.microsoft.com/en-us/powershell/module/activedirectory/get-adtrust?view=windowsserver2022-ps)
 This verifies domain trust relationships, also determines if they are trusts within our forest or with domains in other forests, the type of trust, the direction of the trust, and the name of the domain the relationship is with. Could be advantageous for child-to-parent trust relationships and attacking across forest trusts.
