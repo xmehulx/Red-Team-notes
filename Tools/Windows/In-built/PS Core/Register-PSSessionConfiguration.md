@@ -1,0 +1,1 @@
+[Register-PSSessionConfiguration](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/register-pssessionconfiguration?view=powershell-7.2) creates and registers a new session configuration.

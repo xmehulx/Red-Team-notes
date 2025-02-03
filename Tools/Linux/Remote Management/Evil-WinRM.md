@@ -30,3 +30,10 @@ $ cat /etc/krb5.conf
 ```shell-session
 $ proxychains evil-winrm -i dc01 -r inlanefreight.htb
 ```
+# Kerberos "Double-Hop"
+[[klist]] can confirm if any forwardable credentials are stored.
+```powershell
+PS > $SecPassword = ConvertTo-SecureString '!qazXSW@' -AsPlainText -Force
+PS > $Cred = New-Object System.Management.Automation.PSCredential('INLANEFREIGHT\backupadm', $SecPassword)
+PS > get-domainuser -spn -credential $Cred | select samaccountname
+```

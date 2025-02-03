@@ -36,7 +36,7 @@ PowerView is a tool written in PowerShell which, much like BloodHound, provides 
 | [[#[Get-DomainPolicy](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainPolicy/)\|Get-DomainPolicy]]                            | Returns the default domain policy or the domain controller policy for the current domain             |
 | **Computer Enumeration Functions:**                                                                                                        |                                                                                                      |
 | `Get-NetLocalGroup`                                                                                                                        | Enumerates local groups on the local or a remote machine                                             |
-| `Get-NetLocalGroupMember`                                                                                                                  | Enumerates members of a specific local group                                                         |
+| [[#[Get-NetLocalGroupMember](https://powersploit.readthedocs.io/en/latest/Recon/Get-NetLocalGroupMember/)\|Get-NetLocalGroupMember]]       | Enumerates members of a specific local group                                                         |
 | `Get-NetShare`                                                                                                                             | Returns open shares on the local (or a remote) machine                                               |
 | `Get-NetSession`                                                                                                                           | Will return session information for the local (or a remote) machine                                  |
 | [[#[Test-AdminAccess](https://powersploit.readthedocs.io/en/latest/Recon/Test-AdminAccess/)\|Test-AdminAccess]]                            | Tests if the current user has administrative access to the local (or a remote) machine               |
@@ -94,6 +94,11 @@ Used to test local admin access on current or a remote  machine.
 PS > Test-AdminAccess -ComputerName ACADEMY-EA-MS01
 ```
 Determines whether the current user is local admin on host `ACADEMY-EA-MS01` or not
+## [Get-NetLocalGroupMember](https://powersploit.readthedocs.io/en/latest/Recon/Get-NetLocalGroupMember/)
+Enumerating RDP group members
+```powershell
+PS > Get-NetLocalGroupMember -ComputerName ACADEMY-EA-MS01 -GroupName "Remote Desktop Users"
+```
 ## ACL Enumeration
 [[Live Off the Land#ACL Enumeration|> Live Off the Land]]
 ### Convert-NameToSID

