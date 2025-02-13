@@ -12,7 +12,7 @@ $ smbclient //<IP>/<share> -U ''
 If ccache is present and loaded, we can read shares using this ticket.
 ```shell-session
 # cp /tmp/krb5cc_file .
-# export KRB5CCNAME=/root/krb5cc_copied_file
+# export KRB5CCNAME=/full/path/to/krb5cc_file
 # klist
 # smbclient //dc01/<USER> -k -c ls -no-pass
 ```

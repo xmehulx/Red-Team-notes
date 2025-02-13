@@ -6,6 +6,7 @@ tags:
   - kerberoasting
   - acl-abuse
   - reversible-encryption
+  - asrep-roasting
 ---
 # [PowerView](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon) (by PowerShell Mafia)
 PowerView is a tool written in PowerShell which, much like BloodHound, provides a way to identify where users are logged in on a network, enumerate domain information such as users, computers, groups, ACLS, trusts, hunt for file shares and passwords, perform Kerberoasting, and more.
@@ -18,6 +19,7 @@ PowerView is a tool written in PowerShell which, much like BloodHound, provides 
 | `Get-DomainSPNTicket`                                                                                                                      | Requests the Kerberos ticket for a specified Service Principal Name (SPN) account                    |
 | **Domain/LDAP Functions:**                                                                                                                 |                                                                                                      |
 | `Get-Domain`                                                                                                                               | Will return the AD object for the current (or specified) domain                                      |
+| [[#[Get-DomainSID](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainSID/)\|Get-DomainSID]]                                     | Returns the SID for the current domain or the specified domain                                       |
 | `Get-DomainController`                                                                                                                     | Return a list of the Domain Controllers for the specified domain                                     |
 | [[#[Get-DomainUser](https //powersploit.readthedocs.io/en/latest/Recon/Get-DomainUser/)\|Get-DomainUser]]                                  | Will return all users or specific user objects in AD                                                 |
 | `Get-DomainComputer`                                                                                                                       | Will return all computers or specific computer objects in AD                                         |
@@ -32,7 +34,7 @@ PowerView is a tool written in PowerShell which, much like BloodHound, provides 
 | [[#[Set-DomainObject](https://powersploit.readthedocs.io/en/latest/Recon/Set-DomainObject/)\|Set-DomainObject]]                            | Modifies a gven property for a specified active directory object                                     |
 | [[#[Add-DomainGroupMember](https://powersploit.readthedocs.io/en/latest/Recon/Add-DomainGroupMember/)\|Add-DomainGroupMember]]             | Adds a domain user (or group) to an existing domain group, assuming appropriate permissions to do so |
 | **GPO Functions:**                                                                                                                         |                                                                                                      |
-| `Get-DomainGPO`                                                                                                                            | Will return all GPOs or specific GPO objects in AD                                                   |
+| [[#[Get-DomainGPO](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainGPO/)\|Get-DomainGPO]]                                     | Will return all GPOs or specific GPO objects in AD                                                   |
 | [[#[Get-DomainPolicy](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainPolicy/)\|Get-DomainPolicy]]                            | Returns the default domain policy or the domain controller policy for the current domain             |
 | **Computer Enumeration Functions:**                                                                                                        |                                                                                                      |
 | `Get-NetLocalGroup`                                                                                                                        | Enumerates local groups on the local or a remote machine                                             |
@@ -46,7 +48,7 @@ PowerView is a tool written in PowerShell which, much like BloodHound, provides 
 | `Find-InterestingDomainShareFile`                                                                                                          | Searches for files matching specific criteria on readable shares in the domain                       |
 | `Find-LocalAdminAccess`                                                                                                                    | Find machines on the local domain where the current user has local administrator access              |
 | **Domain Trust Functions:**                                                                                                                |                                                                                                      |
-| `Get-DomainTrust`                                                                                                                          | Returns domain trusts for the current domain or a specified domain                                   |
+| [[#[Get-DomainTrust](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainTrust/)\|Get-DomainTrust]]                               | Returns domain trusts for the current domain or a specified domain                                   |
 | `Get-ForestTrust`                                                                                                                          | Returns all forest trusts for the current forest or a specified forest                               |
 | `Get-DomainForeignUser`                                                                                                                    | Enumerates users who are in groups outside of the user's domain                                      |
 | `Get-DomainForeignGroupMember`                                                                                                             | Enumerates groups with users outside of the group's domain and returns each foreign member           |
@@ -55,6 +57,10 @@ PowerView is a tool written in PowerShell which, much like BloodHound, provides 
 Can be used to find password policy.
 ```powershell
 PS > Get-DomainPolicy
+```
+## [Get-DomainSID](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainSID/)
+```powershell
+PS > Get-DomainSID [[-Domain] <DOMAIN>] [[-Server] <SERVER>] [[-Credential] <PSCredential>]
 ```
 ## [Get-DomainUser](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainUser/)
 This provides information on all users or specific users we specify
@@ -68,6 +74,23 @@ PS > Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
 - Check for accounts with reversible encryption enabled:
 ```powershell
 PS > Get-DomainUser -Identity * | ? {$_.useraccountcontrol -like '*ENCRYPTED_TEXT_PWD_ALLOWED*'} | select samaccountname,useraccountcontrol
+```
+- Description field to find exposed information:
+```powershell
+PS > Get-DomainUser * | Select-Object samaccountname,description | Where-Object {$_.Description -ne $null}
+```
+- Check for `PASSWD_NOTREQD`:
+```powershell
+PS > Get-DomainUser -UACFilter PASSWD_NOTREQD | Select-Object samaccountname,useraccountcontrol
+```
+- Enumerate for `DONT_REQ_PREAUTH` for ASREPRoasting:
+```powershell
+PS > Get-DomainUser -PreauthNotRequired | select samaccountname,userprincipalname,useraccountcontrol | fl
+```
+This can be paired with [[Rubeus#Retrieve AS-REP (ASREPRoasting)|Rubeus]].
+- Enumerate users in child domain:
+```powershell
+PS > Get-DomainUser -Domain <DOMAIN> | select SamAccountName
 ```
 ## Kerberoasting
 - Get a user's TGS Ticket in [[Hashcat]] format:
@@ -84,7 +107,7 @@ It retrieves group-specific information. The `-Recurse` switch finds any group
 PS >  Get-DomainGroupMember -Identity "Domain Admins" -Recurse
 ```
 ## [Get-DomainTrustMapping](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainTrustMapping/)
-Find domain trust mapping similar to ActiveDirectory PS Module
+Find domain trust mapping similar to ActiveDirectory PS Module, and expands on [[#[Get-DomainTrust](https //powersploit.readthedocs.io/en/latest/Recon/Get-DomainTrust/)|Get-DomainTrust]]. 
 ```powershell
 PS > Get-DomainTrustMapping
 ```
@@ -180,6 +203,14 @@ PS > Set-DomainObject -Credential $damundsenCred -Identity adunn -Remove @{'serv
 ```powershell
 PS > Find-InterestingDomainAcl
 ```
-This gives too much info to sift through
+This gives too much info to sift through.
+## [Get-DomainGPO](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainGPO/)
+```powershell
+PS > Get-DomainGPO |select displayname
+```
+## [Get-DomainTrust](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainTrust/)
+```powershell
+PS > Get-DomainTrust
+```
 # [PowerView](https://github.com/BC-SECURITY/Empire/blob/main/empire/server/data/module_source/situational_awareness/network/powerview.ps1) (by "Empire 4")
 The BC-SECURITY version of [PowerView](https://github.com/BC-SECURITY/Empire/blob/master/empire/server/data/module_source/situational_awareness/network/powerview.ps1) has some new functions such as `Get-NetGmsa`, used to hunt for [Group Managed Service Accounts](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).

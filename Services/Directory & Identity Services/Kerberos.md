@@ -20,7 +20,13 @@ $ kinit carlos@INLANEFREIGHT.HTB -k -t /opt/specialfiles/carlos.keytab
 To gain access to the system we can crack the account's password by extracting the hashes from `keytab` file using [[KeyTabExtract]]
 
 ## Impersonating with `ccache`
-For this we can simply set the path of the ccache key as our `KRB5CCNAME` value: ![[SMBclient#Using Kerberos Ticket|SMBclient]]
+For this we can simply set the path of the ccache key as our `KRB5CCNAME` value: 
+```shell-session
+$ cp /tmp/krb5cc_file . 
+$ export KRB5CCNAME=/full/path/to/krb5cc_file
+```
+
+![[SMBclient#Using Kerberos Ticket|SMBclient]]
 
 ## Tools
 - [[Kerbrute]]

