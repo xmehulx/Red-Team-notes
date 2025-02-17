@@ -37,7 +37,6 @@ PS > Get-ADTrust -Filter *
 ```powershell
 PS > Get-ADGroup -Filter * | select name
 PS > Get-ADGroup -Identity "Backup Operators"
-PS > Get-ADGroup -Identity "Enterprise Admins" -Server "INLANEFREIGHT.LOCAL"
 ```
 ## [Get-ADGroupMember](https://docs.microsoft.com/en-us/powershell/module/activedirectory/get-adgroupmember?view=windowsserver2022-ps)
 ```powershell

