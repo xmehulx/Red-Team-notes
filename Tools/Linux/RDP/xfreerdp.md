@@ -5,3 +5,5 @@ $ xfreerdp  /v:<IP> /u:<user> /pth:64F12CDDAA88057E06A81B54E73B949B
 ```
 
 
+# Useful Flags
+- `/drive:Shared,<PATH>`: Share a path

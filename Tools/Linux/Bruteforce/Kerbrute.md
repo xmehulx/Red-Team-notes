@@ -4,7 +4,6 @@ tags:
   - asrep-roasting
 ---
 [Kerbrute](https://github.com/ropnop/kerbrute) is a stealthier option for domain account enumeration. It takes advantage of the fact that [Kerberos Pre-Authentication](https://ldapwiki.com/wiki/Wiki.jsp?page=Kerberos%20Pre-Authentication) failures often will **not** trigger logs or alerts.
-
 # Example Usage
 ## Enumerate Users
 ```shell-session

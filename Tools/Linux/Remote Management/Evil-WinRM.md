@@ -4,7 +4,7 @@ tags:
   - PtT
 ---
 ```shell-session
-$ evil-winrm -i 10.129.201.248 -u 'Cry0l1t3' -p 'P455w0rD!'
+$ evil-winrm -i 10.129.201.248 -u 'Cry0l1t3' -p 'P455w0rD!' [--port <PORT>]
 ```
 # Pass the Hash
 ```shell-session

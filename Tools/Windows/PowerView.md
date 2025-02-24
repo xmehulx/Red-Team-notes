@@ -130,6 +130,7 @@ PS > Get-NetLocalGroupMember -ComputerName ACADEMY-EA-MS01 -GroupName "Remote De
 PS > $sid = Convert-NameToSid "wley"
 ```
 ### [Get-DomainObjectACL](https://powersploit.readthedocs.io/en/latest/Recon/Get-DomainObjectAcl/)
+Helps find permissions any Domain Object (users for example) has.
 >Searching without the `ResolveGUIDs` flag, `ObjectAceType` returns non human-readable GUID which makes an ACE entry unclear under that specific `ActiveDirectoryRights`
 ```powershell
 PS > Get-DomainObjectACL [-ResolveGUIDs] -Identity * | ? {$_.SecurityIdentifier -eq $sid}

