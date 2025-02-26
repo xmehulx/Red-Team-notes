@@ -12,6 +12,15 @@ Attacks: #PtH
 ```bash
 $ crackmapexec smb <IP> --shares -u '' -p ''
 ```
+## Enumerate Network for Systems
+```
+$ crackmapexec smb <IP> <CIDR>
+```
+## Test Credentials across Network
+```
+$ crackmapexec smb <IP> <CIDR> -u <USER> -p <PASS> --sessions
+```
+>NOTE: Having SMB interaction does not necessarily mean we have full access to them.
 ## Useful Flags
 - `--continue-on-success`: To keep on bruteforcing after a successful login.
 - `--local-auth`: If the target is a non-domain joined system.
